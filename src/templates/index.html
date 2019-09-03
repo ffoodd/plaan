@@ -22,34 +22,43 @@
         <link rel="stylesheet" href="css/print.min.css" media="print">
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
-      <header role="banner">
-        {% block skiplinks %}
-          <div>
-            <a href="#nav" class="sr-only sr-only-focusable">Aller à la navigation</a>
-            <a href="#main" class="sr-only sr-only-focusable">Aller au contenu</a>
-          </div>
-        {% endblock %}
-
-        <nav role="navigation" id="nav" aria-label="Navigation principale">
-          {% block navigation %}
-            <ul class="fly-out">
-              <li><a aria-current="page">Accueil</a></li>
-            </ul>
-          {% endblock %}
-        </nav>
-      </header>
-
       <main role="main" id="main" tabindex="-1" itemprop="mainContentOfPage">
         {% block main %}
-
+          <ul class="room no-list" style="--rows: {{ grid.rows }}; --cols: {{ grid.cols }};">
+            {% for character in casting %}
+              {% set label = character.name | lower | replace(" ", "-") %}
+              {% set style = '--posY: ' ~ character.posY ~ '; --posX: ' ~ character.posX ~ ';' %}
+              {% if character.span != undefined %}
+                {% set span = '--span: ' ~ character.span %}
+              {% else %}
+                {% set span = '' %}
+              {% endif %}
+              <li class="character tooltip" style="{{ style }}{{ span }}">
+                <button type="button" aria-describedby="{{ label }}-name">{{ character.name }}</button>
+                <div role="tooltip" id="{{ label }}-name">
+                  <form class="grid-2">
+                    <label class="sr-only" for="{{ label }}-y">Ligne</label>
+                    <input type="number" step="1" min="1" class="no-margin" max="{{ grid.rows }}" id="{{ label }}-y"/>
+                    <label class="sr-only" for="{{ label }}-x">Colonne</label>
+                    <input type="number" step="1" min="1" class="no-margin" max="{{ grid.cols }}" id="{{ label }}-x"/>
+                  </form>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
         {% endblock %}
       </main>
 
+      <aside role="complementary">
+        <a download="plaan.json">Exporter</a>
+        <form>
+          <label for="import">Importer</label>
+          <input id="import" name="import" type="file" accept="json" class="sr-only"/>
+        </form>
+      </aside>
+
       {% block scripts %}
         <script src="js/script.min.js"></script>
-      {% endblock %}
-
-      {% block modal %}
       {% endblock %}
     </body>
 </html>

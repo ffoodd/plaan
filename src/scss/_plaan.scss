@@ -1,1 +1,51 @@
 @charset "UTF-8";
+
+.room {
+  display: grid;
+  gap: $gutter;
+  grid-template: repeat(var(--rows, 9), 1fr) / repeat(var(--cols, 16), 1fr);
+  height: calc( 100vh - #{$gutter * 2} );
+  margin: 0;
+  padding: 0;
+  width: calc( 100vw - #{$gutter * 2} );
+
+  /**
+   * @note Writing-mode
+   ** 1. For everyone except Firefox
+   ** 2. Firefox is the only one supporting the nicer value
+   * @link https://developer.mozilla.org/fr/docs/Web/CSS/writing-mode#Compatibilité_des_navigateurs
+   */
+  li {
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    grid-area: var(--posY, 2) / var(--posX, 2) / span var(--span, 1) / auto;
+    line-height: 1;
+    writing-mode: vertical-lr; /* 1 */
+    writing-mode: sideways-lr; /* 2 */
+  }
+
+  button {
+    height: 100%;
+    width: 7rem;
+  }
+
+  [role="tooltip"] {
+    padding: $gutter;
+    writing-mode: initial;
+  }
+
+  .grid-2 {
+    gap: $gutter;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .room {
+    grid-template: repeat(var(--cols, 9), 1fr) / repeat(var(--rows, 16), 1fr);
+
+    li {
+      grid-area: var(--posX, 2) / var(--posY, 2);
+    }
+  }
+}

@@ -51,15 +51,16 @@ function img() {
       .pipe(gulp.dest(options.paths.docs + 'img'));
 }
 
-function getPeople() {
+function getDatas() {
  return {
-   deck: JSON.parse(fs.readFileSync('./src/datas/people.json'))
+   casting: JSON.parse(fs.readFileSync('./src/datas/casting.json')),
+   grid: JSON.parse(fs.readFileSync('./src/datas/grid.json'))
  };
 }
 
 function template() {
     return gulp.src(options.paths.src + 'templates/*.html')
-      .pipe(data(getPeople))
+      .pipe(data(getDatas))
       .pipe(newer(options.paths.docs))
       .pipe(nunjucks(options.nunjucks))
       .pipe(gulp.dest(options.paths.docs));
