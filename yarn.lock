@@ -6292,9 +6292,9 @@ squeak@^1.0.0:
     console-stream "^0.1.1"
     lpad-align "^1.0.1"
 
-sseeeedd@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/sseeeedd/-/sseeeedd-0.1.4.tgz#84a447cfd65cbb8af9581b2086f0552e455c40c0"
+sseeeedd@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/sseeeedd/-/sseeeedd-0.2.0.tgz#7b80b69bd5655cd925586c4477dae0249922d51e"
   dependencies:
     a11y-dialog "^5.2.0"
     normalize.css "^8.0.1"
