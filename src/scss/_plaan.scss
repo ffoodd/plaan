@@ -55,7 +55,7 @@
   .room {
     grid-template: repeat(var(--cols, 9), 1fr) / repeat(var(--rows, 16), 1fr);
 
-    li {
+    [style] {
       grid-area: var(--posX, 2) / var(--posY, 2);
     }
   }
