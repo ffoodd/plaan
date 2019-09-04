@@ -19,10 +19,20 @@
     align-items: center;
     display: flex;
     font-weight: bold;
-    grid-area: var(--posY, 2) / var(--posX, 2) / span var(--span, 1) / auto;
     line-height: 1;
     writing-mode: vertical-lr; /* 1 */
     writing-mode: sideways-lr; /* 2 */
+
+    &[style] {
+      grid-area: var(--posY, 2) / var(--posX, 2) / span var(--span, 1) / auto;
+    }
+  }
+
+  [role="presentation"] {
+    background: hsla(var(--muted-light), .25);
+    border-radius: .25rem;
+    justify-self: center;
+    width: 7rem;
   }
 
   button {

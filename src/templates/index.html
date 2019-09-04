@@ -24,6 +24,8 @@
     <body itemscope itemtype="http://schema.org/WebPage">
       <main role="main" id="main" tabindex="-1" itemprop="mainContentOfPage">
         {% block main %}
+          {% set cells = grid.rows * grid.cols %}
+          {% set empty = cells - casting.length %}
           <ul class="room no-list" style="--rows: {{ grid.rows }}; --cols: {{ grid.cols }};">
             {% for character in casting %}
               {% set label = character.name | lower | replace(" ", "-") %}
@@ -45,17 +47,20 @@
                 </div>
               </li>
             {% endfor %}
+            {% for cell in range(1, empty) %}
+              <li role="presentation"{% if cell === 1 or cell === 15 %} class="invisible"{% endif %}></li>
+            {% endfor %}
           </ul>
         {% endblock %}
       </main>
 
-      <aside role="complementary">
+      <!--<aside role="complementary">
         <a download="plaan.json">Exporter</a>
         <form>
           <label for="import">Importer</label>
           <input id="import" name="import" type="file" accept="json" class="sr-only"/>
         </form>
-      </aside>
+      </aside>-->
 
       {% block scripts %}
         <script src="js/script.min.js"></script>
