@@ -1,13 +1,17 @@
 @charset "UTF-8";
 
-.room {
+[role="main"] {
   display: grid;
   gap: $gutter;
   grid-template: repeat(var(--rows, 9), 1fr) / repeat(var(--cols, 16), 1fr);
-  height: calc( 100vh - #{$gutter * 2} );
+  height: 100vh;
   margin: 0;
-  padding: 0;
-  width: calc( 100vw - #{$gutter * 2} );
+  padding: 1rem;
+  width: 100vw;
+}
+
+.room {
+  display: contents;
 
   li {
     align-items: center;
@@ -41,6 +45,11 @@
   z-index: 2;
 }
 
+[type="number"] {
+  appearance: textfield;
+  width: 4ch;
+}
+
 @media screen and (orientation: landscape) {
   .room {
     /**
@@ -63,15 +72,6 @@
       writing-mode: initial;
     }
   }
-
-  [role="presentation"] ~ [role="presentation"] {
-    visibility: visible;
-  }
-
-  [role="presentation"],
-  [role="presentation"]:nth-last-child(3) {
-    visibility: hidden;
-  }
 }
 
 @media screen and (orientation: portrait) {
@@ -86,13 +86,5 @@
 
   [style] {
     grid-area: var(--posX, 2) / var(--posY, 2) / auto / span var(--span, 1);
-  }
-
-  [role="presentation"] {
-    visibility: hidden;
-  }
-
-  [role="presentation"] + [role="presentation"] + [role="presentation"] {
-    visibility: visible;
   }
 }
