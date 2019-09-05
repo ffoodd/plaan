@@ -9,41 +9,16 @@
   padding: 0;
   width: calc( 100vw - #{$gutter * 2} );
 
-  /**
-   * @note Writing-mode
-   ** 1. For everyone except Firefox
-   ** 2. Firefox is the only one supporting the nicer value
-   * @link https://developer.mozilla.org/fr/docs/Web/CSS/writing-mode#Compatibilité_des_navigateurs
-   */
   li {
     align-items: center;
     display: flex;
     font-weight: bold;
     line-height: 1;
-    writing-mode: vertical-lr; /* 1 */
-    writing-mode: sideways-lr; /* 2 */
-
-    &[style] {
-      grid-area: var(--posY, 2) / var(--posX, 2) / span var(--span, 1) / auto;
-    }
-  }
-
-  [role="presentation"] {
-    background: hsla(var(--muted-light), .25);
-    border-radius: .25rem;
-    justify-self: center;
-    width: 7rem;
   }
 
   button {
     height: 100%;
-    width: 7rem;
-  }
-
-  [role="tooltip"] {
-    padding: $gutter;
-    writing-mode: initial;
-    z-index: 2;
+    width: 100%;
   }
 
   .grid-2 {
@@ -51,12 +26,73 @@
   }
 }
 
+[style] {
+  grid-area: var(--posY, 2) / var(--posX, 2) / span var(--span, 1) / auto;
+}
+
+[role="presentation"] {
+  background: hsla(var(--muted-light), .25);
+  border-radius: .25rem;
+  justify-self: center;
+}
+
+[role="tooltip"] {
+  padding: $gutter;
+  z-index: 2;
+}
+
+@media screen and (orientation: landscape) {
+  .room {
+    /**
+     * @note Writing-mode
+     ** 1. For everyone except Firefox
+     ** 2. Firefox is the only one supporting the nicer value
+     * @link https://developer.mozilla.org/fr/docs/Web/CSS/writing-mode#Compatibilité_des_navigateurs
+     */
+    li {
+      writing-mode: vertical-lr; /* 1 */
+      writing-mode: sideways-lr; /* 2 */
+    }
+
+    button,
+    [role="presentation"] {
+      width: 7rem;
+    }
+
+    [role="tooltip"] {
+      writing-mode: initial;
+    }
+  }
+
+  [role="presentation"] ~ [role="presentation"] {
+    visibility: visible;
+  }
+
+  [role="presentation"],
+  [role="presentation"]:nth-last-child(3) {
+    visibility: hidden;
+  }
+}
+
 @media screen and (orientation: portrait) {
   .room {
     grid-template: repeat(var(--cols, 9), 1fr) / repeat(var(--rows, 16), 1fr);
 
-    [style] {
-      grid-area: var(--posX, 2) / var(--posY, 2);
+    button,
+    [role="presentation"] {
+      width: 100%;
     }
+  }
+
+  [style] {
+    grid-area: var(--posX, 2) / var(--posY, 2) / auto / span var(--span, 1);
+  }
+
+  [role="presentation"] {
+    visibility: hidden;
+  }
+
+  [role="presentation"] + [role="presentation"] + [role="presentation"] {
+    visibility: visible;
   }
 }
