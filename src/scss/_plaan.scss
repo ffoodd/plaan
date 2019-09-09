@@ -17,7 +17,21 @@
     align-items: center;
     display: flex;
     font-weight: bold;
+    height: 100%;
     line-height: 1;
+  }
+
+  [style] {
+    grid-area: var(--posY, 2) / var(--posX, 2) / span var(--span, 1) / auto;
+  }
+
+  + .room::after,
+  + .room::before,
+  [role="presentation"] {
+    background: hsla(var(--muted-light), .25);
+    border-radius: .25rem;
+    content: "";
+    justify-self: center;
   }
 
   button {
@@ -28,20 +42,19 @@
   .grid-2 {
     gap: $gutter;
   }
-}
 
-[style] {
-  grid-area: var(--posY, 2) / var(--posX, 2) / span var(--span, 1) / auto;
-}
+  + .room::after {
+    grid-area: 1 / 1;
+  }
 
-[role="presentation"] {
-  background: hsla(var(--muted-light), .25);
-  border-radius: .25rem;
-  justify-self: center;
+  + .room::before {
+    grid-area: var(--rows) / 1;
+  }
 }
 
 [role="tooltip"] {
   padding: $gutter;
+  writing-mode: initial;
   z-index: 2;
 }
 
@@ -67,24 +80,21 @@
     [role="presentation"] {
       width: 7rem;
     }
-
-    [role="tooltip"] {
-      writing-mode: initial;
-    }
   }
 }
 
 @media screen and (orientation: portrait) {
-  .room {
-    grid-template: repeat(var(--cols, 9), 1fr) / repeat(var(--rows, 16), 1fr);
-
-    button,
-    [role="presentation"] {
-      width: 100%;
-    }
+  /**
+   * @note Writing-mode
+   ** 1. For everyone except Firefox
+   ** 2. Firefox is the only one supporting the nicer value
+   * @link https://developer.mozilla.org/fr/docs/Web/CSS/writing-mode#Compatibilité_des_navigateurs
+   */
+   main {
+    writing-mode: vertical-rl;
   }
 
-  [style] {
-    grid-area: var(--posX, 2) / var(--posY, 2) / auto / span var(--span, 1);
+  li {
+    writing-mode: horizontal-tb;
   }
 }
