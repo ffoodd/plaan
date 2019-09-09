@@ -6,6 +6,7 @@
   const cols = room.style.getPropertyValue('--cols');
   const inputs = document.querySelectorAll('[type="number"]');
 
+  // @todo Formater localStorage, en mode package.json ?
   document.addEventListener('DOMContentLoaded', () => {
     inputs.forEach(
       item => {
@@ -25,10 +26,15 @@
       });
   });
 
+  // @todo Vérifier si localStorage n’est pas vide
+  // @todo Sinon désactiver le lien
   /*document.querySelector('a[download]').addEventListener('click', function() {
     this.href = 'data:text/json,' + JSON.stringify(localStorage);
   });*/
 
+  // @todo Formater localStorage pour correspondre ?
+  // @todo Grille + personnes + positions
+  // @todo Idem pour enregistrer dans localStorage
   /*document.querySelector('input[type="file"]').addEventListener('change', function(e) {
     var file   = e.target.files[0];
     var reader = new FileReader();
@@ -54,5 +60,10 @@
     reader.readAsText(file);
   });*/
 
+  // @todo Idem que export : si localStorage vide, désactiver
   /*document.querySelector('input[type="reset"]') → vider localStorage*/
+
+
+  // @todo Partir d’un doc vide, importer un fichier pour mouliner le contenu :
+  // @todo documentFragment pour ajouter les éléments de liste, etc.
 })();
