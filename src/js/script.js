@@ -6,14 +6,19 @@
   const cols = room.style.getPropertyValue('--cols');
   const inputs = document.querySelectorAll('[type="number"]');
 
+  function getAxis(item) {
+    const max = item.getAttribute('max');
+    return (max === rows) ? '--posY' : '--posX';
+  }
+
   // @todo Formater localStorage, en mode package.json ?
   document.addEventListener('DOMContentLoaded', () => {
     inputs.forEach(
       item => {
         const parent = item.parentNode.parentNode.parentNode;
-        const max    = item.getAttribute('max');
-        const axis   = (max === rows) ? '--posY' : '--posX';
+        const axis   = getAxis(item);
         const value  = localStorage.getItem(item.id);
+
         if (value !== null) {
           parent.style.setProperty(axis, value);
           item.value = value;
@@ -45,9 +50,9 @@
           localStorage.removeItem(key);
 
           if (key !== '') {
-            var item = document.querySelector('#' + key);
+            const item = document.querySelector('#' + key);
             if (item) {
-              var axis = (item.getAttribute('max') === '16') ? '--posY' : '--posX';
+              const axis = getAxis(item);
               item.parentNode.parentNode.parentNode.style.setProperty(axis, value);
             }
           }
