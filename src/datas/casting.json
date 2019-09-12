@@ -1,12 +1,12 @@
 [
-  {"name": "M. Keating", "posX": 1, "posY": 2, "span": 2},
-  {"name": "Neil Perry", "posX": 7, "posY": 4},
-  {"name": "Todd Anderson", "posX": 2, "posY": 4},
-  {"name": "Knox Overstreet", "posX": 5, "posY": 4},
-  {"name": "Charlie Dalton", "posX": 4, "posY": 4},
-  {"name": "Richard Cameron", "posX": 3, "posY": 3},
-  {"name": "Steven Meeks", "posX": 2, "posY": 2},
-  {"name": "Gerard Pitts", "posX": 5, "posY": 3},
-  {"name": "Hopkins", "posX": 2, "posY": 3},
-  {"name": "Stick", "posX": 5, "posY": 1}
+  {"m-keating": {"name": "M. Keating", "x": 1, "y": 2, "span": 2}},
+  {"neil-perry": {"name": "Neil Perry", "x": 7, "y": 4}},
+  {"todd-anderson": {"name": "Todd Anderson", "x": 2, "y": 4}},
+  {"knox-overstreet": {"name": "Knox Overstreet", "x": 5, "y": 4}},
+  {"charlie-dalton": {"name": "Charlie Dalton", "x": 4, "y": 4}},
+  {"richard-cameron": {"name": "Richard Cameron", "x": 3, "y": 3}},
+  {"steven-meeks": {"name": "Steven Meeks", "x": 2, "y": 2}},
+  {"gerard-pitts": {"name": "Gerard Pitts", "x": 5, "y": 3}},
+  {"hopkins": {"name": "Hopkins", "x": 2, "y": 3}},
+  {"stick": {"name": "Stick", "x": 5, "y": 1}}
 ]
