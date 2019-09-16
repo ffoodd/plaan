@@ -38,12 +38,16 @@
                 <button type="button" aria-describedby="{{ label }}-name">{{ character.name }}</button>
                 <div role="tooltip" id="{{ label }}-name">
                   <form class="grid-2">
-                    <label class="sr-only" for="{{ label }}-y">Ligne</label>
-                    <input type="number" step="1" min="1" class="no-margin" data-key="{{ label }}"
-                           value="{{ character.y }}" max="{{ grid.rows }}" id="{{ label }}-y"/>
-                    <label class="sr-only" for="{{ label }}-x">Colonne</label>
-                    <input type="number" step="1" min="1" class="no-margin" data-key="{{ label }}"
-                           value="{{ character.x }}"max="{{ grid.cols }}" id="{{ label }}-x"/>
+                    <p class="no-margin">
+                      <label for="{{ label }}-y">Ligne</label>
+                      <input type="number" step="1" min="1" class="no-margin" data-key="{{ label }}"
+                             value="{{ character.y }}" max="{{ grid.rows }}" id="{{ label }}-y"/>
+                    </p>
+                    <p class="no-margin">
+                      <label for="{{ label }}-x">Colonne</label>
+                      <input type="number" step="1" min="1" class="no-margin" data-key="{{ label }}"
+                             value="{{ character.x }}"max="{{ grid.cols }}" id="{{ label }}-x"/>
+                    </p>
                   </form>
                 </div>
               </li>
