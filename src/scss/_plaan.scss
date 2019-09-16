@@ -58,9 +58,14 @@
   z-index: 2;
 }
 
-[type="number"] {
-  appearance: textfield;
-  width: 4ch;
+input[type="number"] {
+  appearance: initial;
+  min-width: 6ch;
+
+  &:valid:focus,
+  &:invalid:focus {
+    background-image: none;
+  }
 }
 
 @media screen and (orientation: landscape) {
