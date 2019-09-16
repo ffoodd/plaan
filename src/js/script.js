@@ -17,8 +17,9 @@
         const label  = item.dataset.key;
         const axis   = getAxis(item);
         const value  = localStorage.getItem(label);
-        let result   = new Object();
-        result.name  = parent.querySelector('button').textContent;
+        let result   = {
+          name: parent.querySelector('button').textContent
+        };
 
         if (value !== null) {
           result = JSON.parse(value);
