@@ -60,7 +60,7 @@
 
 input[type="number"] {
   appearance: initial;
-  min-width: 6ch;
+  width: 6ch;
 
   &:valid:focus,
   &:invalid:focus {
