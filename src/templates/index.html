@@ -27,9 +27,8 @@
           {% set cells = grid.rows * grid.cols %}
           {% set empty = cells - casting.length %}
           <ul class="room no-list no-margin" id="room">
-            {% for character in casting %}
-              {% set label = character.name | lower | replace(" ", "-") | replace(".", "") %}
-              {% set style = '--posY: ' ~ character.y ~ '; --posX: ' ~ character.x ~ ';' %}
+            {% for label, character in casting %}
+              {% set style = '--y: ' ~ character.y ~ '; --x: ' ~ character.x ~ ';' %}
               {% if character.span != undefined %}
                 {% set span = '--span: ' ~ character.span %}
               {% else %}

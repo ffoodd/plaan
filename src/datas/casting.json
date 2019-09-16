@@ -1,12 +1,12 @@
 [
-  {"m-keating": {"name": "M. Keating", "x": 1, "y": 2, "span": 2}},
-  {"neil-perry": {"name": "Neil Perry", "x": 7, "y": 4}},
-  {"todd-anderson": {"name": "Todd Anderson", "x": 2, "y": 4}},
-  {"knox-overstreet": {"name": "Knox Overstreet", "x": 5, "y": 4}},
-  {"charlie-dalton": {"name": "Charlie Dalton", "x": 4, "y": 4}},
-  {"richard-cameron": {"name": "Richard Cameron", "x": 3, "y": 3}},
-  {"steven-meeks": {"name": "Steven Meeks", "x": 2, "y": 2}},
-  {"gerard-pitts": {"name": "Gerard Pitts", "x": 5, "y": 3}},
-  {"hopkins": {"name": "Hopkins", "x": 2, "y": 3}},
-  {"stick": {"name": "Stick", "x": 5, "y": 1}}
+  ["m-keating", {"name": "M. Keating", "x": 1, "y": 2, "span": 2}],
+  ["neil-perry", {"name": "Neil Perry", "x": 7, "y": 4}],
+  ["todd-anderson", {"name": "Todd Anderson", "x": 2, "y": 4}],
+  ["knox-overstreet", {"name": "Knox Overstreet", "x": 5, "y": 4}],
+  ["charlie-dalton", {"name": "Charlie Dalton", "x": 4, "y": 4}],
+  ["richard-cameron", {"name": "Richard Cameron", "x": 3, "y": 3}],
+  ["steven-meeks", {"name": "Steven Meeks", "x": 2, "y": 2}],
+  ["gerard-pitts", {"name": "Gerard Pitts", "x": 5, "y": 3}],
+  ["hopkins", {"name": "Hopkins", "x": 2, "y": 3}],
+  ["stick", {"name": "Stick", "x": 5, "y": 1}]
 ]

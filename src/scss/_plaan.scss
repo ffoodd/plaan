@@ -22,7 +22,7 @@
   }
 
   [style] {
-    grid-area: var(--posY, 2) / var(--posX, 2) / span var(--span, 1) / auto;
+    grid-area: var(--y, 2) / var(--x, 2) / span var(--span, 1) / auto;
   }
 
   + .room::after,

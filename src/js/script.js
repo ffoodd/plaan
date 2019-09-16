@@ -4,31 +4,39 @@
   const room = document.getElementById('main');
   const rows = room.style.getPropertyValue('--rows');
   const cols = room.style.getPropertyValue('--cols');
-  const inputs = document.querySelectorAll('[type="number"]');
 
   function getAxis(item) {
     const max = item.getAttribute('max');
-    return (max === rows) ? '--posY' : '--posX';
+    return (max === rows) ? 'y' : 'x';
   }
 
-  // @todo Formater localStorage, en mode package.json ?
   document.addEventListener('DOMContentLoaded', () => {
-    inputs.forEach(
+    document.querySelectorAll('[type="number"]').forEach(
       item => {
         const parent = item.parentNode.parentNode.parentNode;
+        const label  = item.dataset.key;
         const axis   = getAxis(item);
-        const value  = localStorage.getItem(item.id);
+        const value  = localStorage.getItem(label);
+        let result   = new Object();
+        result.name  = parent.querySelector('button').textContent;
 
         if (value !== null) {
-          parent.style.setProperty(axis, value);
-          item.value = value;
+          result = JSON.parse(value);
+
+          if (result[axis] !== undefined) {
+            parent.style.setProperty(`--${axis}`, result[axis]);
+            item.value = result[axis];
+          }
         }
 
         item.addEventListener('input', event => {
-            parent.style.setProperty(axis, event.target.value);
-            localStorage.setItem(item.id, event.target.value);
+          const position = event.target.value;
+          result[axis] = position;
+          parent.style.setProperty(`--${axis}`, position);
+          localStorage.setItem(label, JSON.stringify(result));
         });
-      });
+      }
+    );
   });
 
   // @todo Vérifier si localStorage n’est pas vide
@@ -67,6 +75,7 @@
 
   // @todo Idem que export : si localStorage vide, désactiver
   /*document.querySelector('input[type="reset"]') → vider localStorage*/
+  // @see https://developer.mozilla.org/fr/docs/Web/API/Storage/clear
 
 
   // @todo Partir d’un doc vide, importer un fichier pour mouliner le contenu :
