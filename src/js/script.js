@@ -13,7 +13,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[type="number"]').forEach(
       item => {
-        const parent = item.parentNode.parentNode.parentNode;
+        const parent = item.closest('li');
         const label  = item.dataset.key;
         const axis   = getAxis(item);
         const value  = localStorage.getItem(label);
