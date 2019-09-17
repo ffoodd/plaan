@@ -4,6 +4,7 @@
   const room = document.getElementById('main');
   const rows = room.style.getPropertyValue('--rows');
   const cols = room.style.getPropertyValue('--cols');
+  const details = document.querySelectorAll('.details-group details');
 
   function getAxis(item) {
     const max = item.getAttribute('max');
@@ -11,6 +12,16 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    details.forEach( target => {
+      target.addEventListener('click', () => {
+        details.forEach(detail => {
+          if (detail !== target) {
+            detail.removeAttribute('open');
+          }
+        });
+      });
+    });
+
     document.querySelectorAll('[type="number"]').forEach(
       item => {
         const parent = item.closest('li');
@@ -18,7 +29,7 @@
         const axis   = getAxis(item);
         const value  = localStorage.getItem(label);
         let result   = {
-          name: parent.querySelector('button').textContent
+          name: parent.querySelector('summary').textContent
         };
 
         if (value !== null) {

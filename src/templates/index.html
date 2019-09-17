@@ -26,7 +26,7 @@
         {% block main %}
           {% set cells = grid.rows * grid.cols %}
           {% set empty = cells - casting.length %}
-          <ul class="room no-list no-margin" id="room">
+          <ul class="room no-list no-margin details-group" id="room">
             {% for label, character in casting %}
               {% set style = '--y: ' ~ character.y ~ '; --x: ' ~ character.x ~ ';' %}
               {% if character.span != undefined %}
@@ -35,10 +35,10 @@
                 {% set span = '' %}
               {% endif %}
               <li class="character tooltip" style="{{ style }}{{ span }}">
-                <button type="button" aria-describedby="{{ label }}-name">{{ character.name }}</button>
-                <div role="tooltip" id="{{ label }}-name">
-                  <form class="grid-2">
-                    <p class="no-margin">
+                <details class="no-margin p-relative">
+                  <summary class="button no-margin p-absolute">{{ character.name }}</summary>
+                  <form class="button no-margin p-absolute">
+                    <p>
                       <label for="{{ label }}-y">Ligne</label>
                       <input type="number" step="1" min="1" class="no-margin" data-key="{{ label }}"
                              value="{{ character.y }}" max="{{ grid.rows }}" id="{{ label }}-y"/>
@@ -49,7 +49,7 @@
                              value="{{ character.x }}"max="{{ grid.cols }}" id="{{ label }}-x"/>
                     </p>
                   </form>
-                </div>
+                </details>
               </li>
             {% endfor %}
           </ul>

@@ -34,9 +34,52 @@
     justify-self: center;
   }
 
-  button {
+  details {
     height: 100%;
     width: 100%;
+
+    > * {
+      backface-visibility: hidden;
+      bottom: 0;
+      height: inherit;
+      left: 0;
+      overflow: hidden;
+      right: 0;
+      top: 0;
+      transition: transform .3s var(--move);
+      transform: perspective(600px) rotateY(0turn);
+      width: inherit;
+      will-change: transform;
+    }
+
+    > * + * {
+      transform: perspective(600px) rotateY(.5turn);
+      writing-mode: initial;
+    }
+
+    &[open] {
+      > * {
+        transform: perspective(600px) rotateY(-.5turn);
+      }
+
+      > * + * {
+        transform: perspective(600px) rotateY(0turn);
+      }
+    }
+
+    p,
+    form {
+      pointer-events: none;
+    }
+
+    input,
+    label {
+      pointer-events: auto;
+    }
+  }
+
+  summary {
+    text-align: center;
   }
 
   .grid-2 {
@@ -52,11 +95,11 @@
   }
 }
 
-[role="tooltip"] {
+/*[role="tooltip"] {
   padding: $gutter;
   writing-mode: initial;
   z-index: 2;
-}
+}*/
 
 input[type="number"] {
   appearance: initial;
@@ -81,7 +124,7 @@ input[type="number"] {
       writing-mode: sideways-lr; /* 2 */
     }
 
-    button,
+    details,
     [role="presentation"] {
       width: 7rem;
     }
