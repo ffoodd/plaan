@@ -4,32 +4,21 @@
   const room = document.getElementById('main');
   const rows = room.style.getPropertyValue('--rows');
   const cols = room.style.getPropertyValue('--cols');
-  const details = document.querySelectorAll('.details-group details');
+  const plan = document.getElementById('plan');
 
   function getAxis(item) {
     const max = item.getAttribute('max');
     return (max === rows) ? 'y' : 'x';
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    details.forEach( target => {
-      target.addEventListener('click', () => {
-        details.forEach(detail => {
-          if (detail !== target) {
-            detail.removeAttribute('open');
-          }
-        });
-      });
-    });
-
-    document.querySelectorAll('[type="number"]').forEach(
+    plan.querySelectorAll('[type="number"]').forEach(
       item => {
         const parent = item.closest('li');
         const label  = item.dataset.key;
         const axis   = getAxis(item);
         const value  = localStorage.getItem(label);
         let result   = {
-          name: parent.querySelector('summary').textContent
+          name: parent.querySelector('h2').textContent
         };
 
         if (value !== null) {
@@ -41,15 +30,70 @@
           }
         }
 
-        item.addEventListener('input', event => {
+        item.addEventListener('change', event => {
           const position = event.target.value;
           result[axis] = position;
           parent.style.setProperty(`--${axis}`, position);
           localStorage.setItem(label, JSON.stringify(result));
-        });
+        }, false);
       }
     );
-  });
+
+    plan.querySelectorAll('[type="button"][data-step]').forEach(
+      item => {
+        const control = item.dataset.controls;
+        const step    = item.dataset.step;
+        const input   = document.getElementById(control);
+        const change  = new Event('change', { bubbles: true });
+
+        item.addEventListener('click', () => {
+          switch (step) {
+            case "up":
+              input.stepUp(1);
+              input.dispatchEvent(change);
+              break;
+            case "down":
+              input.stepDown(1);
+              input.dispatchEvent(change);
+              break;
+            default:
+              console.warn(`${item.textContent} value for data-step matches nothing…`);
+          }
+        }, false);
+      }
+    );
+
+    /*plan.querySelectorAll('[type="button"].arrows').forEach(
+      item => {
+        const control = item.dataset.controls;
+        const change  = new Event('change', { bubbles: true });
+        const vertical = document.getElementById(`${control}-y`);
+        const horizontal = document.getElementById(`${control}-x`);
+
+        item.addEventListener('keydown', event => {
+          switch (event.keycode) {
+            case 37:
+              horizontal.stepDown(1);
+              horizontal.dispatchEvent(change);
+              break;
+            case 38:
+              vertical.stepUp(1);
+              vertical.dispatchEvent(change);
+              break;
+            case 39:
+              horizontal.stepUp(1);
+              horizontal.dispatchEvent(change);
+              break;
+            case 40:
+              vertical.stepDown(1);
+              vertical.dispatchEvent(change);
+              break;
+            default:
+              console.warn(`${control} value for data-step matches nothing…`);
+          }
+        }, false);
+      }
+    );*/
 
   // @todo Vérifier si localStorage n’est pas vide
   // @todo Sinon désactiver le lien

@@ -10,6 +10,11 @@
   width: 100vw;
 }
 
+h2 {
+  all: unset;
+  text-align: center;
+}
+
 .room {
   display: contents;
 
@@ -25,6 +30,11 @@
     grid-area: var(--y, 2) / var(--x, 2) / span var(--span, 1) / auto;
   }
 
+  div {
+    height: 100%;
+    width: 100%;
+  }
+
   + .room::after,
   + .room::before,
   [role="presentation"] {
@@ -32,58 +42,6 @@
     border-radius: .25rem;
     content: "";
     justify-self: center;
-  }
-
-  details {
-    height: 100%;
-    width: 100%;
-
-    > * {
-      backface-visibility: hidden;
-      bottom: 0;
-      height: inherit;
-      left: 0;
-      overflow: hidden;
-      right: 0;
-      top: 0;
-      transition: transform .3s var(--move);
-      transform: perspective(600px) rotateY(0turn);
-      width: inherit;
-      will-change: transform;
-    }
-
-    > * + * {
-      transform: perspective(600px) rotateY(.5turn);
-      writing-mode: initial;
-    }
-
-    &[open] {
-      > * {
-        transform: perspective(600px) rotateY(-.5turn);
-      }
-
-      > * + * {
-        transform: perspective(600px) rotateY(0turn);
-      }
-    }
-
-    p,
-    form {
-      pointer-events: none;
-    }
-
-    input,
-    label {
-      pointer-events: auto;
-    }
-  }
-
-  summary {
-    text-align: center;
-  }
-
-  .grid-2 {
-    gap: $gutter;
   }
 
   + .room::after {
@@ -95,11 +53,47 @@
   }
 }
 
-/*[role="tooltip"] {
-  padding: $gutter;
-  writing-mode: initial;
-  z-index: 2;
-}*/
+.table {
+  display: grid;
+  grid-template-areas:
+    "↖ ← ↗"
+    "↑ • ↓"
+    "↙ → ↘";
+
+  [id="↑"] {
+    grid-area: ↑;
+  }
+
+  [id="↓"] {
+    grid-area: ↓;
+  }
+
+  [id="→"] {
+    grid-area: →;
+  }
+
+  [id="←"] {
+    grid-area: ←;
+  }
+
+  [data-controls] {
+    line-height: 1;
+  }
+
+  [data-controls$="x"] span {
+    display: inline-block;
+    transform: rotate(.25turn);
+  }
+
+  [data-controls$="y"] span {
+    display: inline-block;
+    transform: rotate(-.25turn);
+  }
+
+  h2 {
+    grid-area: •;
+  }
+}
 
 input[type="number"] {
   appearance: initial;
@@ -124,7 +118,7 @@ input[type="number"] {
       writing-mode: sideways-lr; /* 2 */
     }
 
-    details,
+    div,
     [role="presentation"] {
       width: 7rem;
     }
@@ -138,7 +132,7 @@ input[type="number"] {
    ** 2. Firefox is the only one supporting the nicer value
    * @link https://developer.mozilla.org/fr/docs/Web/CSS/writing-mode#Compatibilité_des_navigateurs
    */
-   main {
+  main {
     writing-mode: vertical-rl;
   }
 

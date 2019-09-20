@@ -10,7 +10,7 @@
           <meta property="og:title" content="plaan">
           <meta property="og:type" content="article">
           <meta property="og:description"
-                name="description" content="Editable seating plan using web thinggies">
+                name="description" content="Plan de salle éditable basé sur des astuces HTML / CSS / JS">
           <meta name="twitter:card" content="summary">
         
         <script>
@@ -23,229 +23,530 @@
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
       <main role="main" id="main" tabindex="-1" itemprop="mainContentOfPage" style="--rows:4; --cols:7;">
+        <h1 class="sr-only">Plan de salle du «&nbsp;Cercle des poètes disparus&nbsp;»</h1>
         
           
           
-          <ul class="room no-list no-margin details-group" id="room">
+          <ul class="room no-list no-margin" id="plan">
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 2; --x: 1;--span: 2">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">M. Keating</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="m-keating-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="m-keating"
-                             value="2" max="4" id="m-keating-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="m-keating-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="m-keating"
-                             value="1"max="7" id="m-keating-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 2; --x: 1;--span: 2">
+                <div class="table button no-margin">
+                  <h2>
+                    M. Keating
+                    <button type="button" class="arrows"
+                            data-controls="m-keating">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="m-keating-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="m-keating-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="m-keating-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="m-keating-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="m-keating-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="m-keating"
+                           value="2" max="4" id="m-keating-y"/>
+                  </p>
+                  <p>
+                    <label for="m-keating-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="m-keating"
+                           value="1"max="7" id="m-keating-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 4; --x: 7;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Neil Perry</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="neil-perry-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="neil-perry"
-                             value="4" max="4" id="neil-perry-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="neil-perry-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="neil-perry"
-                             value="7"max="7" id="neil-perry-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 4; --x: 7;">
+                <div class="table button no-margin">
+                  <h2>
+                    Neil Perry
+                    <button type="button" class="arrows"
+                            data-controls="neil-perry">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="neil-perry-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="neil-perry-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="neil-perry-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="neil-perry-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="neil-perry-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="neil-perry"
+                           value="4" max="4" id="neil-perry-y"/>
+                  </p>
+                  <p>
+                    <label for="neil-perry-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="neil-perry"
+                           value="7"max="7" id="neil-perry-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 4; --x: 2;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Todd Anderson</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="todd-anderson-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="todd-anderson"
-                             value="4" max="4" id="todd-anderson-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="todd-anderson-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="todd-anderson"
-                             value="2"max="7" id="todd-anderson-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 4; --x: 2;">
+                <div class="table button no-margin">
+                  <h2>
+                    Todd Anderson
+                    <button type="button" class="arrows"
+                            data-controls="todd-anderson">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="todd-anderson-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="todd-anderson-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="todd-anderson-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="todd-anderson-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="todd-anderson-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="todd-anderson"
+                           value="4" max="4" id="todd-anderson-y"/>
+                  </p>
+                  <p>
+                    <label for="todd-anderson-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="todd-anderson"
+                           value="2"max="7" id="todd-anderson-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 4; --x: 5;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Knox Overstreet</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="knox-overstreet-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="knox-overstreet"
-                             value="4" max="4" id="knox-overstreet-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="knox-overstreet-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="knox-overstreet"
-                             value="5"max="7" id="knox-overstreet-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 4; --x: 5;">
+                <div class="table button no-margin">
+                  <h2>
+                    Knox Overstreet
+                    <button type="button" class="arrows"
+                            data-controls="knox-overstreet">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="knox-overstreet-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="knox-overstreet-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="knox-overstreet-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="knox-overstreet-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="knox-overstreet-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="knox-overstreet"
+                           value="4" max="4" id="knox-overstreet-y"/>
+                  </p>
+                  <p>
+                    <label for="knox-overstreet-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="knox-overstreet"
+                           value="5"max="7" id="knox-overstreet-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 4; --x: 4;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Charlie Dalton</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="charlie-dalton-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="charlie-dalton"
-                             value="4" max="4" id="charlie-dalton-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="charlie-dalton-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="charlie-dalton"
-                             value="4"max="7" id="charlie-dalton-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 4; --x: 4;">
+                <div class="table button no-margin">
+                  <h2>
+                    Charlie Dalton
+                    <button type="button" class="arrows"
+                            data-controls="charlie-dalton">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="charlie-dalton-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="charlie-dalton-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="charlie-dalton-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="charlie-dalton-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="charlie-dalton-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="charlie-dalton"
+                           value="4" max="4" id="charlie-dalton-y"/>
+                  </p>
+                  <p>
+                    <label for="charlie-dalton-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="charlie-dalton"
+                           value="4"max="7" id="charlie-dalton-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 3; --x: 3;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Richard Cameron</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="richard-cameron-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="richard-cameron"
-                             value="3" max="4" id="richard-cameron-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="richard-cameron-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="richard-cameron"
-                             value="3"max="7" id="richard-cameron-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 3; --x: 3;">
+                <div class="table button no-margin">
+                  <h2>
+                    Richard Cameron
+                    <button type="button" class="arrows"
+                            data-controls="richard-cameron">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="richard-cameron-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="richard-cameron-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="richard-cameron-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="richard-cameron-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="richard-cameron-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="richard-cameron"
+                           value="3" max="4" id="richard-cameron-y"/>
+                  </p>
+                  <p>
+                    <label for="richard-cameron-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="richard-cameron"
+                           value="3"max="7" id="richard-cameron-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 2; --x: 2;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Steven Meeks</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="steven-meeks-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="steven-meeks"
-                             value="2" max="4" id="steven-meeks-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="steven-meeks-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="steven-meeks"
-                             value="2"max="7" id="steven-meeks-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 2; --x: 2;">
+                <div class="table button no-margin">
+                  <h2>
+                    Steven Meeks
+                    <button type="button" class="arrows"
+                            data-controls="steven-meeks">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="steven-meeks-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="steven-meeks-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="steven-meeks-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="steven-meeks-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="steven-meeks-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="steven-meeks"
+                           value="2" max="4" id="steven-meeks-y"/>
+                  </p>
+                  <p>
+                    <label for="steven-meeks-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="steven-meeks"
+                           value="2"max="7" id="steven-meeks-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 3; --x: 5;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Gerard Pitts</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="gerard-pitts-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="gerard-pitts"
-                             value="3" max="4" id="gerard-pitts-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="gerard-pitts-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="gerard-pitts"
-                             value="5"max="7" id="gerard-pitts-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 3; --x: 5;">
+                <div class="table button no-margin">
+                  <h2>
+                    Gerard Pitts
+                    <button type="button" class="arrows"
+                            data-controls="gerard-pitts">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="gerard-pitts-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="gerard-pitts-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="gerard-pitts-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="gerard-pitts-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="gerard-pitts-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="gerard-pitts"
+                           value="3" max="4" id="gerard-pitts-y"/>
+                  </p>
+                  <p>
+                    <label for="gerard-pitts-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="gerard-pitts"
+                           value="5"max="7" id="gerard-pitts-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 3; --x: 2;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Hopkins</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="hopkins-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="hopkins"
-                             value="3" max="4" id="hopkins-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="hopkins-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="hopkins"
-                             value="2"max="7" id="hopkins-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 3; --x: 2;">
+                <div class="table button no-margin">
+                  <h2>
+                    Hopkins
+                    <button type="button" class="arrows"
+                            data-controls="hopkins">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="hopkins-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="hopkins-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="hopkins-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="hopkins-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="hopkins-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="hopkins"
+                           value="3" max="4" id="hopkins-y"/>
+                  </p>
+                  <p>
+                    <label for="hopkins-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="hopkins"
+                           value="2"max="7" id="hopkins-x"/>
+                  </p>
+                </form>
               </li>
             
               
               
                 
               
-              <li class="character tooltip" style="--y: 1; --x: 5;">
-                <details class="no-margin p-relative">
-                  <summary class="button no-margin p-absolute">Stick</summary>
-                  <form class="button no-margin p-absolute">
-                    <p>
-                      <label for="stick-y">Ligne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="stick"
-                             value="1" max="4" id="stick-y"/>
-                    </p>
-                    <p class="no-margin">
-                      <label for="stick-x">Colonne</label>
-                      <input type="number" step="1" min="1" class="no-margin" data-key="stick"
-                             value="5"max="7" id="stick-x"/>
-                    </p>
-                  </form>
-                </details>
+              <li style="--y: 1; --x: 5;">
+                <div class="table button no-margin">
+                  <h2>
+                    Stick
+                    <button type="button" class="arrows"
+                            data-controls="stick">
+                      Utilisez les flèches pour déplacer l’élément
+                    </button>
+                  </h2>
+                  <button type="button" class="no-margin no-padding"
+                          id="↑" aria-label="Monter"
+                          data-controls="stick-y"
+                          data-step="up">
+                    <span>↑</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="↓" aria-label="Descendre"
+                          data-controls="stick-y"
+                          data-step="down">
+                    <span>↓</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="→" aria-label="Décaler à droite"
+                          data-controls="stick-x"
+                          data-step="up">
+                    <span>→</span>
+                  </button>
+                  <button type="button" class="no-margin no-padding"
+                          id="←" aria-label="Décaler à gauche"
+                          data-controls="stick-x"
+                          data-step="down">
+                    <span>←</span>
+                  </button>
+                </div>
+                <form class="sr-only">
+                  <p>
+                    <label for="stick-y">Ligne</label>
+                    <input type="number" step="1" min="1" data-key="stick"
+                           value="1" max="4" id="stick-y"/>
+                  </p>
+                  <p>
+                    <label for="stick-x">Colonne</label>
+                    <input type="number" step="1" min="1" data-key="stick"
+                           value="5"max="7" id="stick-x"/>
+                  </p>
+                </form>
               </li>
             
           </ul>
