@@ -10,89 +10,92 @@
     return (max === rows) ? 'y' : 'x';
   }
 
-    plan.querySelectorAll('[type="number"]').forEach(
-      item => {
-        const parent = item.closest('li');
-        const label  = item.dataset.key;
-        const axis   = getAxis(item);
-        const value  = localStorage.getItem(label);
-        let result   = {
-          name: parent.querySelector('h2').textContent
-        };
+  plan.querySelectorAll('[type="number"]').forEach(
+    item => {
+      const parent = item.closest('li');
+      const label  = item.dataset.key;
+      const axis   = getAxis(item);
+      const value  = localStorage.getItem(label);
+      let result   = {
+        name: parent.querySelector('h2').textContent
+      };
 
-        if (value !== null) {
-          result = JSON.parse(value);
+      if (value !== null) {
+        result = JSON.parse(value);
 
-          if (result[axis] !== undefined) {
-            parent.style.setProperty(`--${axis}`, result[axis]);
-            item.value = result[axis];
-          }
+        if (result[axis] !== undefined) {
+          parent.style.setProperty(`--${axis}`, result[axis]);
+          item.value = result[axis];
         }
-
-        item.addEventListener('change', event => {
-          const position = event.target.value;
-          result[axis] = position;
-          parent.style.setProperty(`--${axis}`, position);
-          localStorage.setItem(label, JSON.stringify(result));
-        }, false);
       }
-    );
 
-    plan.querySelectorAll('[type="button"][data-step]').forEach(
-      item => {
-        const control = item.dataset.controls;
-        const step    = item.dataset.step;
-        const input   = document.getElementById(control);
-        const change  = new Event('change', { bubbles: true });
+      item.addEventListener('change', event => {
+        const position = event.target.value;
+        result[axis] = position;
+        parent.style.setProperty(`--${axis}`, position);
+        localStorage.setItem(label, JSON.stringify(result));
+      }, false);
+    }
+  );
 
-        item.addEventListener('click', () => {
-          switch (step) {
-            case "up":
-              input.stepUp(1);
-              input.dispatchEvent(change);
-              break;
-            case "down":
-              input.stepDown(1);
-              input.dispatchEvent(change);
-              break;
-            default:
-              console.warn(`${item.textContent} value for data-step matches nothing…`);
-          }
-        }, false);
-      }
-    );
+  plan.querySelectorAll('[data-step]').forEach(
+    item => {
+      const control = item.dataset.controls;
+      const step    = item.dataset.step;
+      const input   = document.getElementById(control);
+      const change  = new Event('change', { bubbles: true });
 
-    plan.querySelectorAll('.arrows').forEach(
-      item => {
-        const control    = item.dataset.controls;
-        const change     = new Event('change', { bubbles: true });
-        const vertical   = document.getElementById(`${control}-y`);
-        const horizontal = document.getElementById(`${control}-x`);
+      item.addEventListener('click', () => {
+        switch (step) {
+          case "up":
+            input.stepUp(1);
+            input.dispatchEvent(change);
+            break;
+          case "down":
+            input.stepDown(1);
+            input.dispatchEvent(change);
+            break;
+          default:
+            console.warn(`${item.textContent} value for data-step matches nothing…`);
+        }
+      }, false);
+    }
+  );
 
-        item.addEventListener('keydown', event => {
-          switch (event.keyCode) {
-            case 37:
-              horizontal.stepDown(1);
-              horizontal.dispatchEvent(change);
-              break;
-            case 38:
-              vertical.stepDown(1);
-              vertical.dispatchEvent(change);
-              break;
-            case 39:
-              horizontal.stepUp(1);
-              horizontal.dispatchEvent(change);
-              break;
-            case 40:
-              vertical.stepUp(1);
-              vertical.dispatchEvent(change);
-              break;
-            default:
-              console.warn(`${event.keyCode} can't move ${control}…`);
-          }
-        }, false);
-      }
-    );
+  plan.querySelectorAll('.arrows').forEach(
+    item => {
+      const control    = item.dataset.controls;
+      const change     = new Event('change', { bubbles: true });
+      const vertical   = document.getElementById(`${control}-y`);
+      const horizontal = document.getElementById(`${control}-x`);
+
+      item.addEventListener('keydown', event => {
+        switch (event.keyCode) {
+          case 9:
+          case 16:
+            break;
+          case 37:
+            horizontal.stepDown(1);
+            horizontal.dispatchEvent(change);
+            break;
+          case 38:
+            vertical.stepDown(1);
+            vertical.dispatchEvent(change);
+            break;
+          case 39:
+            horizontal.stepUp(1);
+            horizontal.dispatchEvent(change);
+            break;
+          case 40:
+            vertical.stepUp(1);
+            vertical.dispatchEvent(change);
+            break;
+          default:
+            console.warn(`${event.keyCode} can't move ${control}…`);
+        }
+      }, false);
+    }
+  );
 
   // @todo Vérifier si localStorage n’est pas vide
   // @todo Sinon désactiver le lien
@@ -100,7 +103,6 @@
     this.href = 'data:text/json,' + JSON.stringify(localStorage);
   });*/
 
-  // @todo Formater localStorage pour correspondre ?
   // @todo Grille + personnes + positions
   // @todo Idem pour enregistrer dans localStorage
   /*document.querySelector('input[type="file"]').addEventListener('change', function(e) {

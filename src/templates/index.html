@@ -37,31 +37,31 @@
               {% endif %}
               <li style="{{ style }}{{ span }}">
                 <div class="table">
-                  <button type="button" class="arrows button no-margin no-padding"
+                  <button type="button" class="arrows"
                           data-controls="{{ label }}">
                     <span class="sr-only">Utilisez les flèches pour déplacer l’élément</span>
                   </button>
                   <h2>{{ character.name }}</h2>
-                  <button type="button" class="no-margin no-padding"
-                          id="↑" aria-label="Monter"
+                  <button type="button"
+                          id="↑" aria-label="Monter" tabindex="-1"
                           data-controls="{{ label }}-y"
                           data-step="down">
                     <span>↑</span>
                   </button>
-                  <button type="button" class="no-margin no-padding"
-                          id="↓" aria-label="Descendre"
+                  <button type="button"
+                          id="↓" aria-label="Descendre" tabindex="-1"
                           data-controls="{{ label }}-y"
                           data-step="up">
                     <span>↓</span>
                   </button>
-                  <button type="button" class="no-margin no-padding"
-                          id="→" aria-label="Décaler à droite"
+                  <button type="button"
+                          id="→" aria-label="Décaler à droite" tabindex="-1"
                           data-controls="{{ label }}-x"
                           data-step="up">
                     <span>→</span>
                   </button>
-                  <button type="button" class="no-margin no-padding"
-                          id="←" aria-label="Décaler à gauche"
+                  <button type="button"
+                          id="←" aria-label="Décaler à gauche" tabindex="-1"
                           data-controls="{{ label }}-x"
                           data-step="down">
                     <span>←</span>
@@ -70,13 +70,15 @@
                 <form class="sr-only">
                   <p>
                     <label for="{{ label }}-y">Ligne</label>
-                    <input type="number" step="1" min="1" data-key="{{ label }}"
-                           value="{{ character.y }}" max="{{ grid.rows }}" id="{{ label }}-y"/>
+                    <input type="number" step="1" min="1" max="{{ grid.rows }}"
+                           value="{{ character.y }}" tabindex="-1"
+                           data-key="{{ label }}" id="{{ label }}-y"/>
                   </p>
                   <p>
                     <label for="{{ label }}-x">Colonne</label>
-                    <input type="number" step="1" min="1" data-key="{{ label }}"
-                           value="{{ character.x }}"max="{{ grid.cols }}" id="{{ label }}-x"/>
+                    <input type="number" step="1" min="1" max="{{ grid.cols }}"
+                           value="{{ character.x }}" tabindex="-1"
+                           data-key="{{ label }}" id="{{ label }}-x"/>
                   </p>
                 </form>
               </li>

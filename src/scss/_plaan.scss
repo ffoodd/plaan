@@ -30,6 +30,12 @@
     width: 100%;
   }
 
+  button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
   + .room::after,
   + .room::before,
   [role="presentation"] {
@@ -50,12 +56,22 @@
 
 .table {
   contain: strict;
+  border-radius: .25rem;
   display: grid;
   grid-template-areas:
     "↖ ↑ ↗"
     "← • →"
     "↙ ↓ ↘";
   margin: auto;
+
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 0 0 .25rem hsla(var(--accent-light),.25);
+
+    button {
+      background-color: hsl(var(--accent-dark));
+    }
+  }
 
   [id="↑"] {
     grid-area: ↑;
@@ -85,7 +101,7 @@
     grid-area: ↖ / ↖ / ↘ / ↗ ;
 
     &:focus {
-      background: red;
+      isolation: initial;
     }
   }
 
