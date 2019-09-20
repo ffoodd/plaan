@@ -3,7 +3,6 @@
 
   const room = document.getElementById('main');
   const rows = room.style.getPropertyValue('--rows');
-  const cols = room.style.getPropertyValue('--cols');
   const plan = document.getElementById('plan');
 
   function getAxis(item) {
@@ -63,21 +62,21 @@
       }
     );
 
-    /*plan.querySelectorAll('[type="button"].arrows').forEach(
+    plan.querySelectorAll('.arrows').forEach(
       item => {
-        const control = item.dataset.controls;
-        const change  = new Event('change', { bubbles: true });
-        const vertical = document.getElementById(`${control}-y`);
+        const control    = item.dataset.controls;
+        const change     = new Event('change', { bubbles: true });
+        const vertical   = document.getElementById(`${control}-y`);
         const horizontal = document.getElementById(`${control}-x`);
 
         item.addEventListener('keydown', event => {
-          switch (event.keycode) {
+          switch (event.keyCode) {
             case 37:
               horizontal.stepDown(1);
               horizontal.dispatchEvent(change);
               break;
             case 38:
-              vertical.stepUp(1);
+              vertical.stepDown(1);
               vertical.dispatchEvent(change);
               break;
             case 39:
@@ -85,15 +84,15 @@
               horizontal.dispatchEvent(change);
               break;
             case 40:
-              vertical.stepDown(1);
+              vertical.stepUp(1);
               vertical.dispatchEvent(change);
               break;
             default:
-              console.warn(`${control} value for data-step matches nothing…`);
+              console.warn(`${event.keyCode} can't move ${control}…`);
           }
         }, false);
       }
-    );*/
+    );
 
   // @todo Vérifier si localStorage n’est pas vide
   // @todo Sinon désactiver le lien

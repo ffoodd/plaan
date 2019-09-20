@@ -10,11 +10,6 @@
   width: 100vw;
 }
 
-h2 {
-  all: unset;
-  text-align: center;
-}
-
 .room {
   display: contents;
 
@@ -54,11 +49,13 @@ h2 {
 }
 
 .table {
+  contain: strict;
   display: grid;
   grid-template-areas:
-    "↖ ← ↗"
-    "↑ • ↓"
-    "↙ → ↘";
+    "↖ ↑ ↗"
+    "← • →"
+    "↙ ↓ ↘";
+  margin: auto;
 
   [id="↑"] {
     grid-area: ↑;
@@ -76,22 +73,24 @@ h2 {
     grid-area: ←;
   }
 
+  h2 {
+    all: unset;
+    color: hsl(var(--contrast));
+    font-size: 1rem;
+    grid-area: •;
+    text-align: center;
+  }
+
+  .arrows {
+    grid-area: ↖ / ↖ / ↘ / ↗ ;
+
+    &:focus {
+      background: red;
+    }
+  }
+
   [data-controls] {
     line-height: 1;
-  }
-
-  [data-controls$="x"] span {
-    display: inline-block;
-    transform: rotate(.25turn);
-  }
-
-  [data-controls$="y"] span {
-    display: inline-block;
-    transform: rotate(-.25turn);
-  }
-
-  h2 {
-    grid-area: •;
   }
 }
 
@@ -107,20 +106,22 @@ input[type="number"] {
 
 @media screen and (orientation: landscape) {
   .room {
+    div,
+    [role="presentation"] {
+      width: 7rem;
+    }
+  }
+
+  .table {
     /**
      * @note Writing-mode
      ** 1. For everyone except Firefox
      ** 2. Firefox is the only one supporting the nicer value
      * @link https://developer.mozilla.org/fr/docs/Web/CSS/writing-mode#Compatibilité_des_navigateurs
      */
-    li {
+    h2 {
       writing-mode: vertical-lr; /* 1 */
       writing-mode: sideways-lr; /* 2 */
-    }
-
-    div,
-    [role="presentation"] {
-      width: 7rem;
     }
   }
 }

@@ -29,31 +29,29 @@
           {% set empty = cells - casting.length %}
           <ul class="room no-list no-margin" id="plan">
             {% for label, character in casting %}
-              {% set style = '--y: ' ~ character.y ~ '; --x: ' ~ character.x ~ ';' %}
+              {% set style = '--y:' ~ character.y ~ '; --x:' ~ character.x ~ ';' %}
               {% if character.span != undefined %}
                 {% set span = '--span: ' ~ character.span %}
               {% else %}
                 {% set span = '' %}
               {% endif %}
               <li style="{{ style }}{{ span }}">
-                <div class="table button no-margin">
-                  <h2>
-                    {{ character.name }}
-                    <button type="button" class="arrows"
-                            data-controls="{{ label }}">
-                      Utilisez les flèches pour déplacer l’élément
-                    </button>
-                  </h2>
+                <div class="table">
+                  <button type="button" class="arrows button no-margin no-padding"
+                          data-controls="{{ label }}">
+                    <span class="sr-only">Utilisez les flèches pour déplacer l’élément</span>
+                  </button>
+                  <h2>{{ character.name }}</h2>
                   <button type="button" class="no-margin no-padding"
                           id="↑" aria-label="Monter"
                           data-controls="{{ label }}-y"
-                          data-step="up">
+                          data-step="down">
                     <span>↑</span>
                   </button>
                   <button type="button" class="no-margin no-padding"
                           id="↓" aria-label="Descendre"
                           data-controls="{{ label }}-y"
-                          data-step="down">
+                          data-step="up">
                     <span>↓</span>
                   </button>
                   <button type="button" class="no-margin no-padding"
