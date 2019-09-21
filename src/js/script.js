@@ -4,6 +4,7 @@
   const room = document.getElementById('main');
   const rows = room.style.getPropertyValue('--rows');
   const plan = document.getElementById('plan');
+  const form = document.getElementById('settings');
 
   function getAxis(item) {
     const max = item.getAttribute('max');
@@ -96,6 +97,12 @@
       }, false);
     }
   );
+
+  form.addEventListener('click', () => {
+    let expanded = form.getAttribute('aria-expanded') === 'true' || false;
+    form.setAttribute('aria-expanded', !expanded);
+    form.nextElementSibling.hidden = expanded;
+  });
 
   // @todo Vérifier si localStorage n’est pas vide
   // @todo Sinon désactiver le lien

@@ -586,14 +586,19 @@
         
       </main>
 
-      <!--<aside role="complementary">
-        <a download="plaan.json">Exporter</a>
-        <form>
-          <label for="import">Importer</label>
-          <input id="import" name="import" type="file" accept="json" class="sr-only"/>
-          <input id="reset" name="reset" type="reset" value="Annuler les modifications"/>
-        </form>
-      </aside>-->
+      <aside role="complementary" class="no-padding">
+        <button type="button" aria-expanded="false" id="settings" class="no-margin">
+          Ouvrir
+        </button>
+        <div hidden>
+          <a download="plaan.json">Exporter</a>
+          <form>
+            <label for="import">Importer</label>
+            <input id="import" name="import" type="file" accept="json" class="sr-only"/>
+            <input id="reset" name="reset" type="reset" value="Annuler les modifications"/>
+          </form>
+        </div>
+      </aside>
 
       
         <script src="js/script.min.js"></script>

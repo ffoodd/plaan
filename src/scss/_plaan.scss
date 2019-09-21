@@ -120,6 +120,28 @@ input[type="number"] {
   }
 }
 
+#settings {
+  border-radius: 0 0 .25rem 0;
+
+  &,
+  & + div {
+    left: 0;
+    position: fixed;
+    top: 0;
+  }
+
+  + div {
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform .3s var(--move);
+    will-change: transform;
+  }
+
+  &[aria-expanded="true"] + div {
+    transform: translateX(0);
+  }
+}
+
 @media screen and (orientation: landscape) {
   .room {
     div,
