@@ -120,25 +120,50 @@ input[type="number"] {
   }
 }
 
-#settings {
-  border-radius: 0 0 .25rem 0;
+aside {
+  background: hsl(var(--contrast));
+  border: 1px solid hsl(var(--accent));
+  border-radius: .25rem;
+  clip-path: inset(0 calc(100% - #{$gutter * 2} - .125rem) calc(100% - #{$gutter * 2} - .125rem) 0);
+  left: $gutter;
+  position: fixed;
+  top: $gutter;
+  transition: clip-path .3s var(--move), box-shadow .3s var(--enter);
+  will-change: clip-path, box-shadow;
 
+  &:hover,
+  &:focus-within {
+    clip-path: inset(-.25rem -.25rem -.25rem -.25rem);
+    box-shadow: 0 0 0 .25rem hsla(var(--accent), .25);
+  }
+
+  button {
+    border-radius: 0 0 .25rem 0;
+    line-height: .875;
+    word-spacing: $gutter / 2;
+  }
+
+  form {
+    padding: $gutter;
+  }
+}
+
+[download] {
   &,
-  & + div {
-    left: 0;
-    position: fixed;
-    top: 0;
+  &:hover,
+  &:focus {
+    color: hsl(var(--muted));
+    text-decoration: line-through;
   }
 
-  + div {
-    height: 100vh;
-    transform: translateX(-100%);
-    transition: transform .3s var(--move);
-    will-change: transform;
-  }
+  &[href] {
+    color: hsl(var(--secondary-dark));
+    text-decoration: underline;
 
-  &[aria-expanded="true"] + div {
-    transform: translateX(0);
+    &:hover,
+    &:focus {
+      color: hsl(var(--secondary));
+    }
   }
 }
 

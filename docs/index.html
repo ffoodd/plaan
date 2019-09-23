@@ -586,18 +586,20 @@
         
       </main>
 
-      <aside role="complementary" class="no-padding">
-        <button type="button" aria-expanded="false" id="settings" class="no-margin">
-          Ouvrir
+      <aside role="complementary" id="settings" class="no-padding">
+        <button type="button" class="no-margin">
+          <span aria-hidden="true">&#9881;</span>&nbsp;Réglages
         </button>
-        <div hidden>
-          <a download="plaan.json">Exporter</a>
-          <form>
-            <label for="import">Importer</label>
-            <input id="import" name="import" type="file" accept="json" class="sr-only"/>
-            <input id="reset" name="reset" type="reset" value="Annuler les modifications"/>
-          </form>
-        </div>
+        <form>
+          <div class="grid-2">
+            <a download="plaan.json">Exporter</a>
+            <p class="mt-0">
+              <label for="import">Importer</label>
+              <input id="import" name="import" type="file" accept="json" class="sr-only"/>
+            </p>
+          </div>
+          <input id="reset" name="reset" type="reset" value="Annuler les modifications"/>
+        </form>
       </aside>
 
       

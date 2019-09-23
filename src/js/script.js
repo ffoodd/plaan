@@ -5,11 +5,20 @@
   const rows = room.style.getPropertyValue('--rows');
   const plan = document.getElementById('plan');
   const form = document.getElementById('settings');
+  const link = document.querySelector('[download]');
+  const file = document.querySelector('[type="file"]');
+  const zero = document.querySelector('[type="reset"]');
 
   function getAxis(item) {
     const max = item.getAttribute('max');
     return (max === rows) ? 'y' : 'x';
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.length) {
+      link.href = 'data:text/json,' + JSON.stringify(localStorage);
+    }
+  });
 
   plan.querySelectorAll('[type="number"]').forEach(
     item => {
@@ -35,6 +44,7 @@
         result[axis] = position;
         parent.style.setProperty(`--${axis}`, position);
         localStorage.setItem(label, JSON.stringify(result));
+        link.href = 'data:text/json,' + JSON.stringify(localStorage);
       }, false);
     }
   );
@@ -98,48 +108,47 @@
     }
   );
 
-  form.addEventListener('click', () => {
-    let expanded = form.getAttribute('aria-expanded') === 'true' || false;
-    form.setAttribute('aria-expanded', !expanded);
-    form.nextElementSibling.hidden = expanded;
-  });
+  // @todo Grille aussi (!)
+  file.addEventListener('change', event => {
+    const upload = event.target.files[0];
+    const reader = new FileReader();
 
-  // @todo Vérifier si localStorage n’est pas vide
-  // @todo Sinon désactiver le lien
-  /*document.querySelector('a[download]').addEventListener('click', function() {
-    this.href = 'data:text/json,' + JSON.stringify(localStorage);
-  });*/
+    reader.onload = (file => {
+      return event => {
+        JSON.parse(event.target.result, (label, value) => {
+          const result = JSON.parse(value);
 
-  // @todo Grille + personnes + positions
-  // @todo Idem pour enregistrer dans localStorage
-  /*document.querySelector('input[type="file"]').addEventListener('change', function(e) {
-    var file   = e.target.files[0];
-    var reader = new FileReader();
+          localStorage.removeItem(label);
 
-    reader.onload = (function(f) {
-      return function(e) {
-        JSON.parse(e.target.result, function(key, value) {
-          localStorage.removeItem(key);
+          if (label !== '') {
+            const item       = document.querySelector(`[data-controls="${label}"]`);
+            const vertical   = document.getElementById(`${label}-y`);
+            const horizontal = document.getElementById(`${label}-x`);
+            const parent     = item.closest('li');
 
-          if (key !== '') {
-            const item = document.querySelector('#' + key);
-            if (item) {
-              const axis = getAxis(item);
-              item.parentNode.parentNode.parentNode.style.setProperty(axis, value);
+            if (result.y !== undefined) {
+              parent.style.setProperty('--y', result.y);
+              vertical.value = result.y;
+            }
+
+            if (result.x !== undefined) {
+              parent.style.setProperty('--x', result.x);
+              horizontal.value = result.x;
             }
           }
 
-          localStorage.setItem(key, value);
+          localStorage.setItem(label, value);
         });
       }
-    })(file);
+    })(upload);
 
-    reader.readAsText(file);
-  });*/
+    reader.readAsText(upload);
+  });
 
-  // @todo Idem que export : si localStorage vide, désactiver
-  /*document.querySelector('input[type="reset"]') → vider localStorage*/
-  // @see https://developer.mozilla.org/fr/docs/Web/API/Storage/clear
+  // @todo Comment remettre les valeurs d’origine, dans les styles (?)
+  zero.addEventListener('click', () => {
+    localStorage.clear();
+  });
 
 
   // @todo Partir d’un doc vide, importer un fichier pour mouliner le contenu :
