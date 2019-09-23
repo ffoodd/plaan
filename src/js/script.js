@@ -58,11 +58,11 @@
 
       item.addEventListener('click', () => {
         switch (step) {
-          case "up":
+          case 'up':
             input.stepUp();
             input.dispatchEvent(change);
             break;
-          case "down":
+          case 'down':
             input.stepDown();
             input.dispatchEvent(change);
             break;
@@ -108,25 +108,22 @@
 
     reader.onload = (event => {
       JSON.parse(event.target.result, (label, value) => {
-        const result = JSON.parse(value);
-
         localStorage.removeItem(label);
 
-        if (label !== '') {
-          const item       = document.querySelector(`[data-controls="${label}"]`);
-          const vertical   = document.getElementById(`${label}-y`);
-          const horizontal = document.getElementById(`${label}-x`);
-          const parent     = item.closest('li');
+        const result     = JSON.parse(value);
+        const item       = document.querySelector(`[data-controls="${label}"]`);
+        const vertical   = document.getElementById(`${label}-y`);
+        const horizontal = document.getElementById(`${label}-x`);
+        const parent     = item.closest('li');
 
-          if (result.y !== undefined) {
-            parent.style.setProperty('--y', result.y);
-            vertical.value = result.y;
-          }
+        if (result.y !== undefined) {
+          parent.style.setProperty('--y', result.y);
+          vertical.value = result.y;
+        }
 
-          if (result.x !== undefined) {
-            parent.style.setProperty('--x', result.x);
-            horizontal.value = result.x;
-          }
+        if (result.x !== undefined) {
+          parent.style.setProperty('--x', result.x);
+          horizontal.value = result.x;
         }
 
         localStorage.setItem(label, value);
