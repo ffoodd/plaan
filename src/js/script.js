@@ -59,15 +59,13 @@
       item.addEventListener('click', () => {
         switch (step) {
           case "up":
-            input.stepUp(1);
+            input.stepUp();
             input.dispatchEvent(change);
             break;
           case "down":
-            input.stepDown(1);
+            input.stepDown();
             input.dispatchEvent(change);
             break;
-          default:
-            console.warn(`${item.textContent} value for data-step matches nothing…`);
         }
       }, false);
     }
@@ -81,28 +79,23 @@
       const horizontal = document.getElementById(`${control}-x`);
 
       item.addEventListener('keydown', event => {
-        switch (event.keyCode) {
-          case 9:
-          case 16:
-            break;
-          case 37:
-            horizontal.stepDown(1);
+        switch (event.key) {
+          case 'ArrowLeft':
+            horizontal.stepDown();
             horizontal.dispatchEvent(change);
             break;
-          case 38:
-            vertical.stepDown(1);
+          case 'ArrowUp':
+            vertical.stepDown();
             vertical.dispatchEvent(change);
             break;
-          case 39:
-            horizontal.stepUp(1);
+          case 'ArrowRight':
+            horizontal.stepUp();
             horizontal.dispatchEvent(change);
             break;
-          case 40:
-            vertical.stepUp(1);
+          case 'ArrowDown':
+            vertical.stepUp();
             vertical.dispatchEvent(change);
             break;
-          default:
-            console.warn(`${event.keyCode} can't move ${control}…`);
         }
       }, false);
     }
@@ -113,34 +106,32 @@
     const upload = event.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = (file => {
-      return event => {
-        JSON.parse(event.target.result, (label, value) => {
-          const result = JSON.parse(value);
+    reader.onload = (event => {
+      JSON.parse(event.target.result, (label, value) => {
+        const result = JSON.parse(value);
 
-          localStorage.removeItem(label);
+        localStorage.removeItem(label);
 
-          if (label !== '') {
-            const item       = document.querySelector(`[data-controls="${label}"]`);
-            const vertical   = document.getElementById(`${label}-y`);
-            const horizontal = document.getElementById(`${label}-x`);
-            const parent     = item.closest('li');
+        if (label !== '') {
+          const item       = document.querySelector(`[data-controls="${label}"]`);
+          const vertical   = document.getElementById(`${label}-y`);
+          const horizontal = document.getElementById(`${label}-x`);
+          const parent     = item.closest('li');
 
-            if (result.y !== undefined) {
-              parent.style.setProperty('--y', result.y);
-              vertical.value = result.y;
-            }
-
-            if (result.x !== undefined) {
-              parent.style.setProperty('--x', result.x);
-              horizontal.value = result.x;
-            }
+          if (result.y !== undefined) {
+            parent.style.setProperty('--y', result.y);
+            vertical.value = result.y;
           }
 
-          localStorage.setItem(label, value);
-        });
-      }
-    })(upload);
+          if (result.x !== undefined) {
+            parent.style.setProperty('--x', result.x);
+            horizontal.value = result.x;
+          }
+        }
+
+        localStorage.setItem(label, value);
+      });
+    });
 
     reader.readAsText(upload);
   });
