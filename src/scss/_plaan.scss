@@ -100,16 +100,20 @@ aside {
   background: hsl(var(--contrast));
   border: 1px solid hsl(var(--accent));
   border-radius: .25rem;
-  clip-path: inset(0 calc(100% - #{$gutter * 2} - .125rem) calc(100% - #{$gutter * 2} - .125rem) 0);
+  clip: rect(0, 2.125rem, 2.125rem, 0);
   left: $gutter;
   position: fixed;
   top: $gutter;
-  transition: clip-path .3s var(--move), box-shadow .3s var(--enter);
-  will-change: clip-path, box-shadow;
+  transition: clip .3s var(--move), box-shadow .3s var(--enter);
+  will-change: clip, box-shadow;
 
-  &:hover,
+  &:hover {
+    clip: auto;
+    box-shadow: 0 0 0 .25rem hsla(var(--accent), .25);
+  }
+
   &:focus-within {
-    clip-path: inset(-.25rem -.25rem -.25rem -.25rem);
+    clip: auto;
     box-shadow: 0 0 0 .25rem hsla(var(--accent), .25);
   }
 
@@ -121,6 +125,21 @@ aside {
 
   form {
     padding: $gutter;
+  }
+}
+
+@supports (clip-path: inset(-.25rem -.25rem -.25rem -.25rem)) {
+  aside {
+    clip: unset;
+    clip-path: inset(0 calc(100% - 2.125rem) calc(100% - 2.125rem) 0);
+    transition: clip-path .3s var(--move), box-shadow .3s var(--enter);
+    will-change: clip-path, box-shadow;
+
+    &:hover,
+    &:focus-within {
+      clip-path: inset(-.25rem -.25rem -.25rem -.25rem);
+      box-shadow: 0 0 0 .25rem hsla(var(--accent), .25);
+    }
   }
 }
 
