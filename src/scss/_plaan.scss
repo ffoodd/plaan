@@ -27,6 +27,7 @@
 @supports (grid-template-rows: subgrid) {
   #shadow {
     display: grid;
+    gap: $gutter;
     grid-area: #{1} / #{2} / span var(--rows) / span var(--cols);
     grid-template-columns: repeat(calc(var(--cols) - 1), 1fr);
     grid-template-rows: subgrid;
@@ -34,7 +35,6 @@
     [role="presentation"] {
       background: hsla(var(--muted-light), .25);
       border-radius: .25rem;
-      transform: translateX(-.5rem);
     }
   }
 }
