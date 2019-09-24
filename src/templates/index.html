@@ -26,8 +26,12 @@
         <h1 class="sr-only">Plan de salle du «&nbsp;Cercle des poètes disparus&nbsp;»</h1>
         {% block main %}
           {% set cells = grid.rows * grid.cols %}
-          {% set empty = cells - casting.length %}
-          <ul class="room no-list no-margin" id="plan">
+          <ul class="no-list no-margin" id="shadow">
+            {% for cell in range(3, cells) %}
+              <li role="presentation"></li>
+            {% endfor %}
+          </ul>
+          <ul class="no-list no-margin" id="plan">
             {% for label, character in casting %}
               {% set style = '--y:' ~ character.y ~ '; --x:' ~ character.x ~ ';' %}
               {% if character.span != undefined %}
@@ -82,11 +86,6 @@
                   </p>
                 </form>
               </li>
-            {% endfor %}
-          </ul>
-          <ul class="room no-list no-margin">
-            {% for cell in range(3, empty) %}
-              <li role="presentation"></li>
             {% endfor %}
           </ul>
         {% endblock %}

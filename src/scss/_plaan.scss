@@ -3,31 +3,18 @@
 [role="main"] {
   display: grid;
   gap: $gutter;
-  grid-template: repeat(var(--rows, 9), 1fr) / repeat(var(--cols, 16), 1fr);
+  grid-template: repeat(var(--rows, 4), 1fr) / repeat(var(--cols, 7), 1fr);
   height: 100vh;
   margin: 0;
   padding: 1rem;
   width: 100vw;
 }
 
-.room {
+#plan {
   display: contents;
-
-  li {
-    align-items: center;
-    display: flex;
-    font-weight: bold;
-    height: 100%;
-    line-height: 1;
-  }
 
   [style] {
     grid-area: var(--y, 2) / var(--x, 2) / span var(--span, 1) / auto;
-  }
-
-  div {
-    height: 100%;
-    width: 100%;
   }
 
   button {
@@ -35,22 +22,20 @@
     margin: 0;
     padding: 0;
   }
+}
 
-  + .room::after,
-  + .room::before,
-  [role="presentation"] {
-    background: hsla(var(--muted-light), .25);
-    border-radius: .25rem;
-    content: "";
-    justify-self: center;
-  }
+@supports (grid-template-rows: subgrid) {
+  #shadow {
+    display: grid;
+    grid-area: #{1} / #{2} / span var(--rows) / span var(--cols);
+    grid-template-columns: repeat(calc(var(--cols) - 1), 1fr);
+    grid-template-rows: subgrid;
 
-  + .room::after {
-    grid-area: 1 / 1;
-  }
-
-  + .room::before {
-    grid-area: var(--rows) / 1;
+    [role="presentation"] {
+      background: hsla(var(--muted-light), .25);
+      border-radius: .25rem;
+      transform: translateX(-.5rem);
+    }
   }
 }
 
@@ -62,6 +47,7 @@
     "↖ ↑ ↗"
     "← • →"
     "↙ ↓ ↘";
+  height: 100%;
   margin: auto;
 
   &:hover,
@@ -73,22 +59,6 @@
     }
   }
 
-  [class="↑"] {
-    grid-area: ↑;
-  }
-
-  [class="↓"] {
-    grid-area: ↓;
-  }
-
-  [class="→"] {
-    grid-area: →;
-  }
-
-  [class="←"] {
-    grid-area: ←;
-  }
-
   h2 {
     all: unset;
     color: hsl(var(--contrast));
@@ -96,28 +66,34 @@
     grid-area: •;
     text-align: center;
   }
+}
 
-  .arrows {
-    grid-area: ↖ / ↖ / ↘ / ↗ ;
+[class="↑"] {
+  grid-area: ↑;
+}
 
-    &:focus {
-      isolation: initial;
-    }
-  }
+[class="↓"] {
+  grid-area: ↓;
+}
 
-  [data-controls] {
-    line-height: 1;
+[class="→"] {
+  grid-area: →;
+}
+
+[class="←"] {
+  grid-area: ←;
+}
+
+[class="arrows"] {
+  grid-area: ↖ / ↖ / ↘ / ↗ ;
+
+  &:focus {
+    isolation: initial;
   }
 }
 
-input[type="number"] {
-  appearance: initial;
-  width: 6ch;
-
-  &:valid:focus,
-  &:invalid:focus {
-    background-image: none;
-  }
+[data-controls] {
+  line-height: 1;
 }
 
 aside {
@@ -168,11 +144,10 @@ aside {
 }
 
 @media screen and (orientation: landscape) {
-  .room {
-    div,
-    [role="presentation"] {
-      width: 7rem;
-    }
+  li {
+    height: 100%;
+    margin: auto;
+    width: 7rem;
   }
 
   .table {
