@@ -28,7 +28,7 @@
   #shadow {
     display: grid;
     gap: $gutter;
-    grid-area: #{1} / #{2} / span var(--rows) / span var(--cols);
+    grid-area: #{1} / #{2} / span var(--rows) / span calc(var(--cols) - 1);
     grid-template-columns: repeat(calc(var(--cols) - 1), 1fr);
     grid-template-rows: subgrid;
 

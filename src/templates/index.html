@@ -22,11 +22,13 @@
         <link rel="stylesheet" href="css/print.min.css" media="print">
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
-      <main role="main" id="main" tabindex="-1" itemprop="mainContentOfPage" style="--rows:{{ grid.rows }}; --cols:{{ grid.cols }};">
-        <h1 class="sr-only">Plan de salle du «&nbsp;Cercle des poètes disparus&nbsp;»</h1>
+      <header role="banner" class="sr-only">
+        <h1>Plan de salle du «&nbsp;Cercle des poètes disparus&nbsp;»</h1>
+      </header>
+      <main role="main" id="main" itemprop="mainContentOfPage" style="--rows:{{ grid.rows }}; --cols:{{ grid.cols }};">
         {% block main %}
           {% set cells = grid.rows * grid.cols %}
-          <ul class="no-list no-margin" id="shadow">
+          <ul class="no-list no-margin" id="shadow" role="presentation">
             {% for cell in range(3, cells) %}
               <li role="presentation"></li>
             {% endfor %}
