@@ -25,7 +25,7 @@
       <header role="banner" class="sr-only">
         <h1>Plan de salle du «&nbsp;Cercle des poètes disparus&nbsp;»</h1>
       </header>
-      <main role="main" id="main" itemprop="mainContentOfPage" style="--rows:{{ grid.rows }}; --cols:{{ grid.cols }};">
+      <main role="main" id="main" itemprop="mainContentOfPage">
         {% block main %}
           {% set cells = grid.rows * grid.cols %}
           <ul class="no-list no-margin" id="shadow" role="presentation">
@@ -37,57 +37,11 @@
             {% for label, character in casting %}
               {% set style = '--y:' ~ character.y ~ '; --x:' ~ character.x ~ ';' %}
               {% if character.span != undefined %}
-                {% set span = '--span: ' ~ character.span %}
+                {% set span = ' --span:' ~ character.span ~ ';' %}
               {% else %}
                 {% set span = '' %}
               {% endif %}
-              <li style="{{ style }}{{ span }}">
-                <div class="table">
-                  <button type="button" class="arrows"
-                          data-controls="{{ label }}">
-                    <span class="sr-only">Utilisez les flèches pour déplacer l’élément</span>
-                  </button>
-                  <h2>{{ character.name }}</h2>
-                  <button type="button"
-                          class="↑" aria-label="Monter" tabindex="-1"
-                          data-controls="{{ label }}-y"
-                          data-step="down">
-                    <span>↑</span>
-                  </button>
-                  <button type="button"
-                          class="↓" aria-label="Descendre" tabindex="-1"
-                          data-controls="{{ label }}-y"
-                          data-step="up">
-                    <span>↓</span>
-                  </button>
-                  <button type="button"
-                          class="→" aria-label="Décaler à droite" tabindex="-1"
-                          data-controls="{{ label }}-x"
-                          data-step="up">
-                    <span>→</span>
-                  </button>
-                  <button type="button"
-                          class="←" aria-label="Décaler à gauche" tabindex="-1"
-                          data-controls="{{ label }}-x"
-                          data-step="down">
-                    <span>←</span>
-                  </button>
-                </div>
-                <form class="sr-only">
-                  <p>
-                    <label for="{{ label }}-y">Ligne</label>
-                    <input type="number" step="1" min="1" max="{{ grid.rows }}"
-                           value="{{ character.y }}" tabindex="-1"
-                           data-key="{{ label }}" id="{{ label }}-y"/>
-                  </p>
-                  <p>
-                    <label for="{{ label }}-x">Colonne</label>
-                    <input type="number" step="1" min="1" max="{{ grid.cols }}"
-                           value="{{ character.x }}" tabindex="-1"
-                           data-key="{{ label }}" id="{{ label }}-x"/>
-                  </p>
-                </form>
-              </li>
+              <li style="{{ style }}{{ span }}">{{ character.name }}</li>
             {% endfor %}
           </ul>
         {% endblock %}
