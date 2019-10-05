@@ -4,12 +4,8 @@
   const rows = 4;
   const cols = 7;
 
-  const room = document.getElementById('main');
   const plan = document.getElementById('plan');
   const form = document.getElementById('settings');
-  const link = document.querySelector('[download]');
-  const file = document.querySelector('[type="file"]');
-  const zero = document.querySelector('[type="reset"]');
 
   function createForm(prop, x, y) {
     const label = prop.toLowerCase().replace(' ', '-');
@@ -53,12 +49,38 @@
     return document.createRange().createContextualFragment(template);
   }
 
+  function createPanel() {
+    const template = `
+			<button type="button" class="no-margin">
+          <span aria-hidden="true">&#9881;</span>&nbsp;Réglages
+        </button>
+        <form>
+          <div class="grid-2">
+            <a download="plaan.json" class="no-margin">Exporter</a>
+            <p class="no-margin">
+              <label for="import">Importer</label>
+              <input id="import" name="import" type="file" accept="json" class="sr-only"/>
+            </p>
+          </div>
+          <input id="reset" name="reset" type="reset" value="Annuler les modifications"/>
+        </form>`;
+
+    return document.createRange().createContextualFragment(template);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     main.style.setProperty('--rows', rows);
     main.style.setProperty('--cols', cols);
 
+    const panel = createPanel();
+    form.append(panel);
+
+    const link = document.querySelector('[download]');
+    const file = document.querySelector('[type="file"]');
+    const zero = document.querySelector('[type="reset"]');
+
     if (localStorage.length) {
-      link.href = 'data:text/json,' + JSON.stringify(localStorage);
+      link.href = 'data:text/json,[' + JSON.stringify(localStorage) + ']';
     }
 
     plan.querySelectorAll('[style]').forEach(
@@ -95,7 +117,7 @@
             result[axis] = position;
             item.style.setProperty(`--${axis}`, position);
             localStorage.setItem(label, JSON.stringify(result));
-            link.href = 'data:text/json,' + JSON.stringify(localStorage);
+            link.href = 'data:text/json,[' + JSON.stringify(localStorage) + ']';
           }, false);
         });
 
@@ -146,42 +168,42 @@
         });
       }
     );
-  });
 
-  // @todo Grille aussi (!)
-  file.addEventListener('change', event => {
-    const upload = event.target.files[0];
-    const reader = new FileReader();
+    // @todo Grille aussi (!)
+    file.addEventListener('change', event => {
+      const upload = event.target.files[0];
+      const reader = new FileReader();
 
-    reader.onload = (event => {
-      JSON.parse(event.target.result, (label, value) => {
-        localStorage.removeItem(label);
+      reader.onload = (event => {
+        JSON.parse(event.target.result, (label, value) => {
+          localStorage.removeItem(label);
 
-        const result     = JSON.parse(value);
-        const item       = document.querySelector(`[data-controls="${label}"]`);
-        const vertical   = document.getElementById(`${label}-y`);
-        const horizontal = document.getElementById(`${label}-x`);
-        const parent     = item.closest('li');
+          const result     = JSON.parse(value);
+          const item       = document.querySelector(`[data-controls="${label}"]`);
+          const vertical   = document.getElementById(`${label}-y`);
+          const horizontal = document.getElementById(`${label}-x`);
+          const parent     = item.closest('li');
 
-        if (result.y !== undefined) {
-          parent.style.setProperty('--y', result.y);
-          vertical.value = result.y;
-        }
+          if (result.y !== undefined) {
+            parent.style.setProperty('--y', result.y);
+            vertical.value = result.y;
+          }
 
-        if (result.x !== undefined) {
-          parent.style.setProperty('--x', result.x);
-          horizontal.value = result.x;
-        }
+          if (result.x !== undefined) {
+            parent.style.setProperty('--x', result.x);
+            horizontal.value = result.x;
+          }
 
-        localStorage.setItem(label, value);
+          localStorage.setItem(label, value);
+        });
       });
+
+      reader.readAsText(upload);
     });
 
-    reader.readAsText(upload);
-  });
-
-  // @todo Comment remettre les valeurs d’origine, dans les styles (?)
-  zero.addEventListener('click', () => {
-    localStorage.clear();
+    // @todo Comment remettre les valeurs d’origine, dans les styles (?)
+    zero.addEventListener('click', () => {
+      localStorage.clear();
+    });
   });
 })();
