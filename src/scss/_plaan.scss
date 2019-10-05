@@ -24,6 +24,31 @@
   }
 }
 
+#shadow {
+  display: contents;
+
+  [role="presentation"] {
+    background: hsla(var(--muted-light), .25);
+    border-radius: .25rem;
+  }
+}
+
+@supports not (grid-template-rows: subgrid) {
+  #shadow [role="presentation"] {
+    display: inline-block;
+
+    &:first-child {
+      grid-area: 1 / 1;
+      width: 0;
+    }
+
+    &:last-child {
+      grid-area: var(--rows) / 1;
+      width: 0;
+    }
+  }
+}
+
 @supports (grid-template-rows: subgrid) {
   #shadow {
     display: grid;
@@ -31,11 +56,6 @@
     grid-area: #{1} / #{2} / span var(--rows) / span calc(var(--cols) - 1);
     grid-template-columns: repeat(calc(var(--cols) - 1), 1fr);
     grid-template-rows: subgrid;
-
-    [role="presentation"] {
-      background: hsla(var(--muted-light), .25);
-      border-radius: .25rem;
-    }
   }
 }
 
