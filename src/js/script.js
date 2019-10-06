@@ -114,6 +114,10 @@
 
           input.addEventListener('change', event => {
             const position = event.target.value;
+            const stored = localStorage.getItem(label);
+            if (stored !== null) {
+              result = JSON.parse(stored);
+            }
             result[axis] = position;
             item.style.setProperty(`--${axis}`, position);
             localStorage.setItem(label, JSON.stringify(result));
@@ -204,6 +208,7 @@
     // @todo Comment remettre les valeurs d’origine, dans les styles (?)
     zero.addEventListener('click', () => {
       localStorage.clear();
+      document.location.reload();
     });
   });
 })();
