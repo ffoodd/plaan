@@ -12,7 +12,7 @@
     const template = `
       <div class="table">
         <button type="button" class="arrows" data-controls="${label}">
-          <span class="sr-only">Utilisez les flèches pour déplacer l’élément</span>
+          <span class="sr-only">Utilisez les flèches pour déplacer ${prop}</span>
         </button>
         <h2>${prop}</h2>
         <button type="button" data-controls="${label}-y" data-step="down"
