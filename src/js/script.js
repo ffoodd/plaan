@@ -11,27 +11,18 @@
     const label = prop.toLowerCase().replace(' ', '-');
     const template = `
       <div class="table">
-        <button type="button" class="arrows"
-                data-controls="${label}">
+        <button type="button" class="arrows" data-controls="${label}">
           <span class="sr-only">Utilisez les flèches pour déplacer l’élément</span>
         </button>
         <h2>${prop}</h2>
         <button type="button" data-controls="${label}-y" data-step="down"
-                class="↑" aria-label="Monter" tabindex="-1">
-          <span>↑</span>
-        </button>
+                class="↑" aria-label="Monter" tabindex="-1">↑</button>
         <button type="button" data-controls="${label}-y" data-step="up"
-                class="↓" aria-label="Descendre" tabindex="-1">
-          <span>↓</span>
-        </button>
+                class="↓" aria-label="Descendre" tabindex="-1">↓</button>
         <button type="button" data-controls="${label}-x" data-step="up"
-                class="→" aria-label="Décaler à droite" tabindex="-1">
-          <span>→</span>
-        </button>
+                class="→" aria-label="Décaler à droite" tabindex="-1">→</button>
         <button type="button" data-controls="${label}-x" data-step="down"
-                class="←" aria-label="Décaler à gauche" tabindex="-1">
-          <span>←</span>
-        </button>
+                class="←" aria-label="Décaler à gauche" tabindex="-1">←</button>
       </div>
       <form class="sr-only">
         <p>
@@ -78,6 +69,7 @@
     const link = document.querySelector('[download]');
     const file = document.querySelector('[type="file"]');
     const zero = document.querySelector('[type="reset"]');
+    const change = new Event('change', { bubbles: true });
 
     if (localStorage.length) {
       link.href = 'data:text/json,[' + JSON.stringify(localStorage) + ']';
@@ -86,7 +78,6 @@
     plan.querySelectorAll('[style]').forEach(
       item => {
         const name = item.textContent;
-        const change = new Event('change', { bubbles: true });
         const x = item.style.getPropertyValue('--x');
         const y = item.style.getPropertyValue('--y');
         const form = createForm(name, x, y);
