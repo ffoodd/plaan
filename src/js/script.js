@@ -72,97 +72,95 @@
     const change = new Event('change', { bubbles: true });
 
     if (localStorage.length) {
-      link.href = 'data:text/json,[' + JSON.stringify(localStorage) + ']';
+      link.href = 'data:text/json,' + JSON.stringify(localStorage);
     }
 
-    plan.querySelectorAll('[style]').forEach(
-      item => {
-        const name = item.textContent;
-        const x = item.style.getPropertyValue('--x');
-        const y = item.style.getPropertyValue('--y');
-        const form = createForm(name, x, y);
+    plan.querySelectorAll('[style]').forEach(item => {
+      const name = item.textContent;
+      const x = item.style.getPropertyValue('--x');
+      const y = item.style.getPropertyValue('--y');
+      const form = createForm(name, x, y);
 
-        item.innerHTML = '';
-        item.append(form);
+      item.innerHTML = '';
+      item.append(form);
 
-        item.querySelectorAll('[type="number"]').forEach( input => {
-          const label  = input.dataset.key;
-          const max    = Number(input.getAttribute('max'));
-          const axis   = (max === rows) ? 'y' : 'x';
-          const value  = localStorage.getItem(label);
-          let result   = {
-            name: name
-          };
+      item.querySelectorAll('[type="number"]').forEach(input => {
+        const label  = input.dataset.key;
+        const max    = Number(input.getAttribute('max'));
+        const axis   = (max === rows) ? 'y' : 'x';
+        const value  = localStorage.getItem(label);
+        let result   = {
+          name: name
+        };
 
-          if (value !== null) {
-            result = JSON.parse(value);
+        if (value !== null) {
+          result = JSON.parse(value);
 
-            if (result[axis] !== undefined) {
-              item.style.setProperty(`--${axis}`, result[axis]);
-              input.value = result[axis];
-            }
+          if (result[axis] !== undefined) {
+            item.style.setProperty(`--${axis}`, result[axis]);
+            input.value = result[axis];
           }
+        }
 
-          input.addEventListener('change', event => {
-            const position = event.target.value;
-            const stored = localStorage.getItem(label);
-            if (stored !== null) {
-              result = JSON.parse(stored);
-            }
-            result[axis] = position;
-            item.style.setProperty(`--${axis}`, position);
-            localStorage.setItem(label, JSON.stringify(result));
-            link.href = 'data:text/json,[' + JSON.stringify(localStorage) + ']';
-          }, false);
-        });
+        input.addEventListener('change', event => {
+          const position = event.target.value;
+          const stored = localStorage.getItem(label);
+          if (stored !== null) {
+            result = JSON.parse(stored);
+          }
+          result[axis] = position;
+          item.style.setProperty(`--${axis}`, position);
+          localStorage.setItem(label, JSON.stringify(result));
+          link.href = 'data:text/json,' + JSON.stringify(localStorage);
+        }, false);
+      });
 
-        item.querySelectorAll('[data-step]').forEach( arrow => {
-          const control = arrow.dataset.controls;
-          const step    = arrow.dataset.step;
-          const input   = document.getElementById(control);
+      item.querySelectorAll('[data-step]').forEach(arrow => {
+        const control = arrow.dataset.controls;
+        const step    = arrow.dataset.step;
+        const input   = document.getElementById(control);
 
-          arrow.addEventListener('click', () => {
-            switch (step) {
-              case 'up':
-                input.stepUp();
-                input.dispatchEvent(change);
-                break;
-              case 'down':
-                input.stepDown();
-                input.dispatchEvent(change);
-                break;
-            }
-          }, false);
-        });
+        arrow.addEventListener('click', () => {
+          switch (step) {
+            case 'up':
+              input.stepUp();
+              input.dispatchEvent(change);
+              break;
+            case 'down':
+              input.stepDown();
+              input.dispatchEvent(change);
+              break;
+          }
+        }, false);
+      });
 
-        item.querySelectorAll('.arrows').forEach( arrows => {
-          const control    = arrows.dataset.controls;
-          const vertical   = document.getElementById(`${control}-y`);
-          const horizontal = document.getElementById(`${control}-x`);
+      item.querySelectorAll('.arrows').forEach(arrows => {
+        const control    = arrows.dataset.controls;
+        const vertical   = document.getElementById(`${control}-y`);
+        const horizontal = document.getElementById(`${control}-x`);
 
-          arrows.addEventListener('keydown', event => {
-            switch (event.key) {
-              case 'ArrowLeft':
-                horizontal.stepDown();
-                horizontal.dispatchEvent(change);
-                break;
-              case 'ArrowUp':
-                vertical.stepDown();
-                vertical.dispatchEvent(change);
-                break;
-              case 'ArrowRight':
-                horizontal.stepUp();
-                horizontal.dispatchEvent(change);
-                break;
-              case 'ArrowDown':
-                vertical.stepUp();
-                vertical.dispatchEvent(change);
-                break;
-            }
-          }, false);
-        });
-      }
-    );
+        arrows.addEventListener('keydown', event => {
+          switch (event.key) {
+            case 'ArrowLeft':
+              horizontal.stepDown();
+              horizontal.dispatchEvent(change);
+              break;
+            case 'ArrowUp':
+              vertical.stepDown();
+              vertical.dispatchEvent(change);
+              break;
+            case 'ArrowRight':
+              horizontal.stepUp();
+              horizontal.dispatchEvent(change);
+              break;
+            case 'ArrowDown':
+              vertical.stepUp();
+              vertical.dispatchEvent(change);
+              break;
+          }
+        }, false);
+      });
+    });
 
     // @todo Grille aussi (!)
     file.addEventListener('change', event => {
@@ -196,7 +194,6 @@
       reader.readAsText(upload);
     });
 
-    // @todo Comment remettre les valeurs d’origine, dans les styles (?)
     zero.addEventListener('click', () => {
       localStorage.clear();
       document.location.reload();
