@@ -155,10 +155,10 @@
 
         arrows.addEventListener('keydown', event => {
           const isPortrait = matchMedia('screen and (orientation: portrait)').matches;
-          const LEFT       = isPortrait ? 'ArrowUp' : 'ArrowLeft'
-          const UP         = isPortrait ? 'ArrowRight' : 'ArrowUp'
-          const RIGHT      = isPortrait ? 'ArrowDown' : 'ArrowRight'
-          const DOWN       = isPortrait ? 'ArrowLeft' : 'ArrowDown'
+          const LEFT       = isPortrait ? 'ArrowUp' : 'ArrowLeft';
+          const UP         = isPortrait ? 'ArrowRight' : 'ArrowUp';
+          const RIGHT      = isPortrait ? 'ArrowDown' : 'ArrowRight';
+          const DOWN       = isPortrait ? 'ArrowLeft' : 'ArrowDown';
 
           switch (event.key) {
             case LEFT:
