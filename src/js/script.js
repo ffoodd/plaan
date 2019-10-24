@@ -140,20 +140,26 @@
         const horizontal = document.getElementById(`${control}-x`);
 
         arrows.addEventListener('keydown', event => {
+          const isPortrait = matchMedia('screen and (orientation: portrait)').matches;
+          const LEFT       = isPortrait ? 'ArrowUp' : 'ArrowLeft'
+          const UP         = isPortrait ? 'ArrowRight' : 'ArrowUp'
+          const RIGHT      = isPortrait ? 'ArrowDown' : 'ArrowRight'
+          const DOWN       = isPortrait ? 'ArrowLeft' : 'ArrowDown'
+
           switch (event.key) {
-            case 'ArrowLeft':
+            case LEFT:
               horizontal.stepDown();
               horizontal.dispatchEvent(change);
               break;
-            case 'ArrowUp':
+            case UP:
               vertical.stepDown();
               vertical.dispatchEvent(change);
               break;
-            case 'ArrowRight':
+            case RIGHT:
               horizontal.stepUp();
               horizontal.dispatchEvent(change);
               break;
-            case 'ArrowDown':
+            case DOWN:
               vertical.stepUp();
               vertical.dispatchEvent(change);
               break;
