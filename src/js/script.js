@@ -116,17 +116,28 @@
       });
 
       item.querySelectorAll('[data-step]').forEach(arrow => {
-        const control = arrow.dataset.controls;
-        const step    = arrow.dataset.step;
-        const input   = document.getElementById(control);
+        const step = arrow.dataset.step;
 
         arrow.addEventListener('click', () => {
+          const isPortrait = matchMedia('screen and (orientation: portrait)').matches;
+          let control      = arrow.dataset.controls;
+
+          if (isPortrait) {
+            const axis = (control.slice(-1) === 'x') ? 'y' : 'x';
+            control = control.slice(0, -1) + axis;
+          }
+
+          const input      = document.getElementById(control);
+          const rotateKeys = isPortrait && control.slice(-1) === 'y';
+          const UP         = rotateKeys ? 'down' : 'up';
+          const DOWN       = rotateKeys ? 'up' : 'down';
+
           switch (step) {
-            case 'up':
+            case UP:
               input.stepUp();
               input.dispatchEvent(change);
               break;
-            case 'down':
+            case DOWN:
               input.stepDown();
               input.dispatchEvent(change);
               break;
@@ -140,20 +151,26 @@
         const horizontal = document.getElementById(`${control}-x`);
 
         arrows.addEventListener('keydown', event => {
+          const isPortrait = matchMedia('screen and (orientation: portrait)').matches;
+          const LEFT       = isPortrait ? 'ArrowUp' : 'ArrowLeft';
+          const UP         = isPortrait ? 'ArrowRight' : 'ArrowUp';
+          const RIGHT      = isPortrait ? 'ArrowDown' : 'ArrowRight';
+          const DOWN       = isPortrait ? 'ArrowLeft' : 'ArrowDown';
+
           switch (event.key) {
-            case 'ArrowLeft':
+            case LEFT:
               horizontal.stepDown();
               horizontal.dispatchEvent(change);
               break;
-            case 'ArrowUp':
+            case UP:
               vertical.stepDown();
               vertical.dispatchEvent(change);
               break;
-            case 'ArrowRight':
+            case RIGHT:
               horizontal.stepUp();
               horizontal.dispatchEvent(change);
               break;
-            case 'ArrowDown':
+            case DOWN:
               vertical.stepUp();
               vertical.dispatchEvent(change);
               break;
