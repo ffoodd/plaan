@@ -123,11 +123,8 @@
           let control      = arrow.dataset.controls;
 
           if (isPortrait) {
-            if (control.slice(-1) === 'x') {
-              control = control.slice(0, -1) + 'y';
-            } else {
-              control = control.slice(0, -1) + 'x';
-            }
+            const axis = (control.slice(-1) === 'x') ? 'y' : 'x';
+            control = control.slice(0, -1) + axis;
           }
 
           const input      = document.getElementById(control);
